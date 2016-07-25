@@ -9,7 +9,7 @@ public class UnitProxy implements IUnit
 	{
 		unitCode_ = unitCode;
 		unitName_ = unitName;
-		unitManager_ = UnitManager.UM();
+		unitManager_ = UnitManager.unitManager();
 	}
 
 	@Override
