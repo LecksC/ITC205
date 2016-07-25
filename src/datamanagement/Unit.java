@@ -1,176 +1,177 @@
 package datamanagement;
 
-public class Unit implements IUnit {
-	private String uc;
-	private String UN;
-	private float co2;
-	private float co1;
-	private float co4;
-	private float co3;
-	private float co5;
-	private int a1, a2, ex;
+public class Unit implements IUnit
+{
+	private String unitCode_, unitName_;
+	private float aeCutoff_, crCutoff_, psCutoff_, diCutoff_, hdCutoff_;
+	private int asg1Weight_, asg2Weight_, examWeight_;
 	
-	private StudentUnitRecordList rs;
+	private StudentUnitRecordList studentUnitRecordList_;
 
-	public Unit(String UC, String un, float f1, float f2, float f3, float f4,
-			float f5, int i1, int i2, int i3, StudentUnitRecordList rl) {
+	public Unit (String unitCode, String unitName,
+				 float aeCutoff, float psCutoff, float crCutoff, float diCutoff, float hdCutoff,
+				 int asg1Weight, int asg2Weight, int examWeight,
+				 StudentUnitRecordList studentUnitRecordList)
+	{
 
-		uc = UC;
-		UN = un;
-		co2 = f1;
-		co1 = f2;
-		this.co4 = f3;
-		co3 = f4;
-		this.co5 = f5;
-		this.setAssessmentWeights(i1, i2, i3);
-		rs = rl == null ? new StudentUnitRecordList() : rl;
+		unitCode_ = unitCode;
+		unitName_ = unitName;
+
+		aeCutoff_ = aeCutoff;
+		psCutoff_ = psCutoff;
+		crCutoff_ = crCutoff;
+		diCutoff_ = diCutoff;
+		hdCutoff_ = hdCutoff;
+
+		this.setAssessmentWeights (asg1Weight, asg2Weight, examWeight);
+		
+		studentUnitRecordList_ = studentUnitRecordList == null ? new StudentUnitRecordList() : studentUnitRecordList;
+	}
+	
+	@Override
+	public String getUnitCode()
+	{
+		return unitCode_;
+	}
+	
+	@Override
+	public String getUnitName()
+	{
+		return unitName_;
+	}
+	
+	@Override
+	public float getAeCutoff()
+	{
+		return aeCutoff_;
+	}
+	
+	@Override
+	public void  setAeCutoff(float cutoff)
+	{
+		aeCutoff_ = cutoff;
 	}
 
-	public String getUnitCode() {
-		return this.uc;
+	@Override
+	public float getPsCutoff()
+	{
+		return this.psCutoff_;
+	}
+	
+	@Override
+	public void  setPsCutoff(float cutoff)
+	{
+		psCutoff_ = cutoff;
+	}
+	
+	@Override
+	public float getCrCutoff()
+	{
+		return crCutoff_;
+	}
+	
+	@Override
+	public void  setCrCutoff(float cutoff)
+	{
+		crCutoff_ = cutoff;
 	}
 
-	public String getUnitName() {
-
-		return this.UN;
+	@Override
+	public float getDiCuttoff()
+	{
+		return diCutoff_;
+	}
+	
+	@Override
+	public void  setDiCutoff(float cutoff)
+	{
+		diCutoff_ = cutoff;
 	}
 
-	public void setPsCutoff1(float cutoff) {
-		this.co2 = cutoff;
+	@Override
+	public float getHdCutoff()
+	{
+		return hdCutoff_;
+	}
+	
+	@Override
+	public void  setHdCutoff(float cutoff)
+	{
+		hdCutoff_ = cutoff;
 	}
 
-	public float getPsCutoff() {
-		return this.co2;
+	@Override
+	public int getAsg1Weight()
+	{
+		return asg1Weight_;
+	}
+	
+	@Override
+	public int getAsg2Weight()
+	{
+		return asg2Weight_;
+	}
+	
+	@Override
+	public int getExamWeight()
+	{
+		return examWeight_;
 	}
 
-	public void setCrCutoff(float cutoff) {
-		this.co1 = cutoff;
+	@Override
+	public void setAssessmentWeights(int asg1Weight, int asg2Weight, int examWeight)
+	{
+		if (asg1Weight < 0 || asg1Weight > 100 ||
+			asg2Weight < 0 || asg2Weight > 100 ||
+			examWeight < 0 || examWeight > 100 )
+				throw new RuntimeException ("Assessment weights cant be less than zero or greater than 100");
+
+		
+		if (asg1Weight + asg2Weight + examWeight != 100)
+			throw new RuntimeException ("Assessment weights must add to 100");
+		
+		asg1Weight_ = asg1Weight;
+		asg2Weight_ = asg2Weight;
+		examWeight_ = examWeight;			
 	}
-
-	public float getCrCutoff() {
-		return this.co1;
+	
+	@Override
+	public void addStudentRecord(IStudentUnitRecord record)
+	{
+		studentUnitRecordList_.add(record);
 	}
-
-	public void setDiCutoff(float cutoff) {
-		this.co4 = cutoff;
-	}
-
-	public float getDiCuttoff() {
-		return this.co4;
-	}
-
-	public void HDCutoff(float cutoff) {
-		this.co3 = cutoff;
-	}
-
-	public void setHdCutoff(float cutoff) {
-		this.co3 = cutoff;
-	}
-
-	public float getHdCutoff() {
-		return this.co3;
-
-	}
-
-	public void setAeCutoff(float cutoff) {
-		this.co5 = cutoff;
-	}
-
-	public float getAeCutoff() {
-		return this.co5;
-	}
-
-	public void addStudentRecord(IStudentUnitRecord record) {
-		rs.add(record);
-	}
-
-	public IStudentUnitRecord getStudentRecord(int studentID) {
-		for (IStudentUnitRecord r : rs) {
+	
+	@Override
+	public IStudentUnitRecord getStudentRecord(int studentID)
+	{
+		for (IStudentUnitRecord r : studentUnitRecordList_)
 			if (r.getStudentID() == studentID)
 				return r;
-		}
+		
 		return null;
 	}
-
-	public StudentUnitRecordList listStudentRecords() {
-		return rs;
-	}
-
+	
 	@Override
-	public int getAsg1Weight() {
-		return a1;
-	}
-
-	@Override
-	public int getAsg2Weight() {
-		return a2;
-	}
-
-	@Override
-	public int getExamWeight() {
-		return ex;
-	}
-
-	@Override
-	public void setAssessmentWeights(int a1, int a2, int ex) {
-		if (a1 < 0 || a1 > 100 ||
-			a2 < 0 || a2 > 100 ||
-			ex < 0 || ex > 100 ) {
-			throw new RuntimeException("Assessment weights cant be less than zero or greater than 100");
-		}			
-		if (a1 + a2 + ex != 100) {
-			throw new RuntimeException("Assessment weights must add to 100");
-		}
-		this.a1 = a1;
-		this.a2 = a2;
-		this.ex = ex;			
+	public StudentUnitRecordList listStudentRecords()
+	{
+		return studentUnitRecordList_;
 	}
 	
-	private void setCutoffs( float ps, float cr, float di, float hd, float ae) {
-		if (ps < 0 || ps > 100 ||
-			cr < 0 || cr > 100 ||
-			di < 0 || di > 100 ||
-			hd < 0 || hd > 100 ||
-			ae < 0 || ae > 100 ) {
-			throw new RuntimeException("Assessment cutoffs cant be less than zero or greater than 100");
-		}
-		if (ae >= ps) {
-			throw new RuntimeException("AE cutoff must be less than PS cutoff");
-		}
-		if (ps >= cr) {
-			throw new RuntimeException("PS cutoff must be less than CR cutoff");
-		}
-		if (cr >= di) {
-			throw new RuntimeException("CR cutoff must be less than DI cutoff");
-		}
-		if (di >= hd) {
-			throw new RuntimeException("DI cutoff must be less than HD cutoff");
-		}
+	@Override
+	public String getGrade(float asg1Mark, float asg2Mark, float exam1Mark)
+	{
+		float total = asg1Mark + asg2Mark + exam1Mark;
 
-	}
-	
-	public String getGrade(float f1, float f2, float f3) {
-		float t = f1 + f2 + f3;
-		
-		if (f1 < 0 || f1 > a1 ||
-			f2 < 0 || f2 > a2 ||
-			f3 < 0 || f3 > ex ) {
+		if (asg1Mark  < 0 || asg1Mark  > asg1Weight_ ||
+			asg2Mark  < 0 || asg2Mark  > asg2Weight_ ||
+			exam1Mark < 0 || exam1Mark > examWeight_ )
 			throw new RuntimeException("marks cannot be less than zero or greater than assessment weights");
-		}
-
-		if (t < co5) {
-			return "FL";
-		} else if (t < co2)
-			return "AE";
-		else if (t < co1)
-			return "PS";
-		else if (t < co4)
-			return "CR";
-		else if (t < co3)
-			return "DI";
-		else
-			return "HD";
+		
+		if		(total < aeCutoff_)	return "FL";
+		else if (total < psCutoff_)	return "AE";
+		else if (total < crCutoff_)	return "PS";
+		else if (total < diCutoff_) return "CR";
+		else if (total < hdCutoff_) return "DI";
+		else						return "HD";
 	}
-
-	
 }
