@@ -23,12 +23,12 @@ public interface IUnit
 	public float getHighDistinctionCutoff();
 	public void  setHighDistinctionCutoff(float cutoff);
 
-	public int  getassignment1Weight();
-	public int  getassignment2Weight();
+	public int  getAssignment1Weight();
+	public int  getAssignment2Weight();
 	public int  getExamWeight();
-	public void setAssessmentWeights(int asg1Weight, int asg2Weight, int examWeight);
+	public void setAssessmentWeights(int assignment1Weight, int assignment2Weight, int examWeight);
 
-	public String getGrade(float asg1Grade, float asg2Grade, float examGrade);
+	public String getGrade(float assignment1Grade, float assignment2Grade, float examGrade);
 
 	public void addStudentRecord(IStudentUnitRecord record);
 	public IStudentUnitRecord getStudentRecord(int studentID);

@@ -145,7 +145,7 @@ public class Unit
 	
 	
 	@Override
-	public int getassignment1Weight()
+	public int getAssignment1Weight()
 	{
 		return assignment1Weight_;
 	}
@@ -153,7 +153,7 @@ public class Unit
 	
 	
 	@Override
-	public int getassignment2Weight()
+	public int getAssignment2Weight()
 	{
 		return assignment2Weight_;
 	}
