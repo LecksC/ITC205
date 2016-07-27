@@ -1,32 +1,36 @@
 package datamanagement;
 
-public class Unit implements IUnit
+public class Unit
+	implements IUnit
 {
-	private String unitCode_, unitName_;
-	private float aeCutoff_, crCutoff_, psCutoff_, diCutoff_, hdCutoff_;
-	private int asg1Weight_, asg2Weight_, examWeight_;
-	
+	private String	unitCode_, unitName_;
+	private float	additionalExaminationCutoff_, passCutoff_, creditCutoff_, distinctionCutoff_, highDistinctionCutoff_;
+	private int		assignment1Weight_, assignment2Weight_, examWeight_;
 	private StudentUnitRecordList studentUnitRecordList_;
 
+	
+	
 	public Unit (String unitCode, String unitName,
-				 float aeCutoff, float psCutoff, float crCutoff, float diCutoff, float hdCutoff,
-				 int asg1Weight, int asg2Weight, int examWeight,
+				 float additionalExaminationCutoff, float passCutoff, float creditCutoff, float distinctionCutoff, float highDistinctionCutoff,
+				 int assignment1Weight, int assignment2Weight, int examWeight,
 				 StudentUnitRecordList studentUnitRecordList)
 	{
 
 		unitCode_ = unitCode;
 		unitName_ = unitName;
 
-		aeCutoff_ = aeCutoff;
-		psCutoff_ = psCutoff;
-		crCutoff_ = crCutoff;
-		diCutoff_ = diCutoff;
-		hdCutoff_ = hdCutoff;
+		additionalExaminationCutoff_	= additionalExaminationCutoff;
+		passCutoff_						= passCutoff;
+		creditCutoff_					= creditCutoff;
+		distinctionCutoff_				= distinctionCutoff;
+		highDistinctionCutoff_			= highDistinctionCutoff;
 
-		this.setAssessmentWeights (asg1Weight, asg2Weight, examWeight);
+		this.setAssessmentWeights (assignment1Weight, assignment2Weight, examWeight);
 		
 		studentUnitRecordList_ = studentUnitRecordList == null ? new StudentUnitRecordList() : studentUnitRecordList;
 	}
+	
+	
 	
 	@Override
 	public String getUnitCode()
@@ -34,83 +38,127 @@ public class Unit implements IUnit
 		return unitCode_;
 	}
 	
+	
+	
+	@Override
+	public void setUnitCode(String unitCode)
+	{
+		unitCode_ = unitCode;
+	}
+	
+	
+	
 	@Override
 	public String getUnitName()
 	{
 		return unitName_;
 	}
 	
-	@Override
-	public float getAeCutoff()
-	{
-		return aeCutoff_;
-	}
+	
 	
 	@Override
-	public void  setAeCutoff(float cutoff)
+	public void setUnitName(String unitName)
 	{
-		aeCutoff_ = cutoff;
+		unitName_ = unitName;
+	}
+	
+	
+	
+	@Override
+	public float getAdditionalExaminationCutoff()
+	{
+		return additionalExaminationCutoff_;
+	}
+	
+	
+	
+	@Override
+	public void  setAdditionalExaminationCutoff(float cutoff)
+	{
+		additionalExaminationCutoff_ = cutoff;
 	}
 
-	@Override
-	public float getPsCutoff()
-	{
-		return this.psCutoff_;
-	}
+	
 	
 	@Override
-	public void  setPsCutoff(float cutoff)
+	public float getPassCutoff()
 	{
-		psCutoff_ = cutoff;
+		return this.passCutoff_;
 	}
 	
-	@Override
-	public float getCrCutoff()
-	{
-		return crCutoff_;
-	}
+	
 	
 	@Override
-	public void  setCrCutoff(float cutoff)
+	public void  setPassCutoff(float cutoff)
 	{
-		crCutoff_ = cutoff;
+		passCutoff_ = cutoff;
+	}
+	
+	
+	
+	@Override
+	public float getCreditCutoff()
+	{
+		return creditCutoff_;
+	}
+	
+	
+	
+	@Override
+	public void  setCreditCutoff(float cutoff)
+	{
+		creditCutoff_ = cutoff;
 	}
 
-	@Override
-	public float getDiCuttoff()
-	{
-		return diCutoff_;
-	}
+	
 	
 	@Override
-	public void  setDiCutoff(float cutoff)
+	public float getDistinctionCutoff()
 	{
-		diCutoff_ = cutoff;
+		return distinctionCutoff_;
+	}
+	
+	
+	
+	@Override
+	public void  setDistinctionCutoff(float cutoff)
+	{
+		distinctionCutoff_ = cutoff;
 	}
 
-	@Override
-	public float getHdCutoff()
-	{
-		return hdCutoff_;
-	}
+	
 	
 	@Override
-	public void  setHdCutoff(float cutoff)
+	public float getHighDistinctionCutoff()
 	{
-		hdCutoff_ = cutoff;
+		return highDistinctionCutoff_;
+	}
+	
+	
+	
+	@Override
+	public void  setHighDistinctionCutoff(float cutoff)
+	{
+		highDistinctionCutoff_ = cutoff;
 	}
 
-	@Override
-	public int getAsg1Weight()
-	{
-		return asg1Weight_;
-	}
+	
 	
 	@Override
-	public int getAsg2Weight()
+	public int getassignment1Weight()
 	{
-		return asg2Weight_;
+		return assignment1Weight_;
 	}
+	
+	
+	
+	@Override
+	public int getassignment2Weight()
+	{
+		return assignment2Weight_;
+	}
+	
+	
 	
 	@Override
 	public int getExamWeight()
@@ -118,28 +166,36 @@ public class Unit implements IUnit
 		return examWeight_;
 	}
 
+	
+	
 	@Override
-	public void setAssessmentWeights(int asg1Weight, int asg2Weight, int examWeight)
+	public void setAssessmentWeights(int assignment1Weight, int assignment2Weight, int examWeight)
 	{
-		if (asg1Weight < 0 || asg1Weight > 100 ||
-			asg2Weight < 0 || asg2Weight > 100 ||
-			examWeight < 0 || examWeight > 100 )
+		boolean assignment1INotInRange	= assignment1Weight < 0 || assignment1Weight > 100;
+		boolean assignment2IsNotInRange	= assignment2Weight < 0 || assignment2Weight > 100;
+		boolean examIsNotInRange		= examWeight		< 0 || examWeight		 > 100;
+		
+		if (assignment1INotInRange || assignment2IsNotInRange || examIsNotInRange )
 				throw new RuntimeException ("Assessment weights cant be less than zero or greater than 100");
 
 		
-		if (asg1Weight + asg2Weight + examWeight != 100)
+		if (assignment1Weight + assignment2Weight + examWeight != 100)
 			throw new RuntimeException ("Assessment weights must add to 100");
 		
-		asg1Weight_ = asg1Weight;
-		asg2Weight_ = asg2Weight;
-		examWeight_ = examWeight;			
+		assignment1Weight_	= assignment1Weight;
+		assignment2Weight_	= assignment2Weight;
+		examWeight_			= examWeight;			
 	}
+	
+	
 	
 	@Override
 	public void addStudentRecord(IStudentUnitRecord record)
 	{
 		studentUnitRecordList_.add(record);
 	}
+	
+	
 	
 	@Override
 	public IStudentUnitRecord getStudentRecord(int studentID)
@@ -151,27 +207,33 @@ public class Unit implements IUnit
 		return null;
 	}
 	
+	
+	
 	@Override
 	public StudentUnitRecordList listStudentRecords()
 	{
 		return studentUnitRecordList_;
 	}
 	
+	
+	
 	@Override
-	public String getGrade(float asg1Mark, float asg2Mark, float exam1Mark)
+	public String getGrade(float assignment1Mark, float assignment2Mark, float exam1Mark)
 	{
-		float total = asg1Mark + asg2Mark + exam1Mark;
+		float total = assignment1Mark + assignment2Mark + exam1Mark;
 
-		if (asg1Mark  < 0 || asg1Mark  > asg1Weight_ ||
-			asg2Mark  < 0 || asg2Mark  > asg2Weight_ ||
-			exam1Mark < 0 || exam1Mark > examWeight_ )
+		boolean assignment1INotInRange	= assignment1Mark	< 0	|| assignment1Mark  > assignment1Weight_;
+		boolean assignment2IsNotInRange	= assignment2Mark	< 0	|| assignment2Mark  > assignment2Weight_;
+		boolean examIsNotInRange		= exam1Mark			< 0	|| exam1Mark		> examWeight_;
+		
+		if (assignment1INotInRange || assignment2IsNotInRange || examIsNotInRange)
 			throw new RuntimeException("marks cannot be less than zero or greater than assessment weights");
 		
-		if		(total < aeCutoff_)	return "FL";
-		else if (total < psCutoff_)	return "AE";
-		else if (total < crCutoff_)	return "PS";
-		else if (total < diCutoff_) return "CR";
-		else if (total < hdCutoff_) return "DI";
-		else						return "HD";
+		if		(total < additionalExaminationCutoff_)	return "FL";
+		else if (total < passCutoff_)					return "AE";
+		else if (total < creditCutoff_)					return "PS";
+		else if (total < distinctionCutoff_)			return "CR";
+		else if (total < highDistinctionCutoff_)		return "DI";
+		else											return "HD";
 	}
 }
