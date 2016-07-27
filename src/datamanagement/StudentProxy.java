@@ -18,7 +18,7 @@ implements IStudent
 
 
 
-    public Integer getId()
+    public Integer getStudentId()
     {
         return studentId_;
     }

@@ -6,7 +6,7 @@ implements IStudent
     private Integer studentId_;
     private String firstName_;
     private String lastName_;
-    private StudentUnitRecordList studentUnitRecords_; // of StudentUnitRecord
+    private StudentUnitRecordList studentUnitRecords_;
 
     public Student(Integer studentId, String firstName, String lastName, StudentUnitRecordList studentUnitRecordList)
     {
@@ -22,7 +22,7 @@ implements IStudent
 
 
 
-    public Integer getId() 
+    public Integer getStudentId() 
     {
         return studentId_;
     }

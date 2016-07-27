@@ -15,8 +15,8 @@ public class ListStudentsControl
     {
         studentLister.clearStudents();
         StudentMap students = studentManager_.getStudentsByUnit(unitCode);
-        for (Integer id : students.keySet()) {
-            studentLister.addStudent(students.get(id));
+        for (Integer studentId : students.keySet()) {
+            studentLister.addStudent(students.get(studentId));
         }
     }
 }
