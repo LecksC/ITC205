@@ -1,6 +1,7 @@
 package datamanagement;
 
 import org.jdom.Document;
+import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
@@ -14,7 +15,7 @@ public class XMLManager
     private static XMLManager instance_ = null;
     private Document document_;
 
-    public static XMLManager getXML()
+    public static XMLManager getInstance()
     {
         if (instance_ == null) {
             instance_ = new XMLManager();
@@ -57,6 +58,19 @@ public class XMLManager
     public Document getDocument()
     {
         return document_;
+    }
+    
+    
+    
+    public Element[] getTableElements(String tableName)
+    throws Exception
+    {
+    	Object[] records = getDocument().getRootElement().getChild(tableName).getChildren("record").toArray();
+    	if(records instanceof Element[]) {
+            return (Element[]) records;
+    	}
+
+        throw new Exception("DBMD: getTableElements : failed to retrieve elements from " + tableName);
     }
 
 

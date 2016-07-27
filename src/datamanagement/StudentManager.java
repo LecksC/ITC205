@@ -42,7 +42,7 @@ public class StudentManager
 
     private Element getStudentElement(Integer studentId)
     {
-		List<Element> elements = (List<Element>) XMLManager.getXML().getDocument().getRootElement().getChild("studentTable").getChildren("student");
+		List<Element> elements = (List<Element>) XMLManager.getInstance().getDocument().getRootElement().getChild("studentTable").getChildren("student");
         for (Element element : elements) {
             if (studentId.toString().equals(element.getAttributeValue("sid"))) {
                 return element;
