@@ -1,8 +1,9 @@
 package datamanagement;
 
-public interface IStudent {
+public interface IStudent
+{
 
-    public Integer getID();
+    public Integer getId();
 
     public String getFirstName();
     public void setFirstName(String firstName);
@@ -10,9 +11,7 @@ public interface IStudent {
     public String getLastName();
     public void setLastName(String lastName);
 
-    public void addUnitRecord( IStudentUnitRecord record );
-    public IStudentUnitRecord getUnitRecord( String unitCode );
-
+    public void addUnitRecord(IStudentUnitRecord studentUnitRecord);
+    public IStudentUnitRecord getUnitRecord(String unitCode);
     public StudentUnitRecordList getUnitRecords();
-
 }
