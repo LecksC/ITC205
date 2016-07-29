@@ -28,6 +28,7 @@ public class UnitManager
 		return iUnit != null ? iUnit : createUnit(unitCode);
 	}
 
+
 	@SuppressWarnings("unchecked")
 	private IUnit createUnit(String unitCode)
 	{
@@ -35,8 +36,7 @@ public class UnitManager
 
 		for (Element el : (List<Element>) XMLManager.getXML().getDocument().getRootElement().getChild("unitTable").getChildren("unit"))
 			
-			if (unitCode.equals(el.getAttributeValue("uid")))
-			{
+			if (unitCode.equals(el.getAttributeValue("uid"))) {
 				iUnit = new Unit(
 						el.getAttributeValue("uid"),
 						el.getAttributeValue("name"),
@@ -66,8 +66,7 @@ public class UnitManager
 
 		unitMap = new UnitMap();
 		
-		for (Element el : (List<Element>) XMLManager.getXML().getDocument().getRootElement().getChild("unitTable").getChildren("unit"))
-		{
+		for (Element el : (List<Element>) XMLManager.getXML().getDocument().getRootElement().getChild("unitTable").getChildren("unit")) {
 			iUnit = new UnitProxy(el.getAttributeValue("uid"),
 					el.getAttributeValue("name"));
 			

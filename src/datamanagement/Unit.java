@@ -77,7 +77,7 @@ public class Unit
 	{
 		additionalExaminationCutoff_ = cutoff;
 	}
-
+	
 	
 	
 	@Override
@@ -171,11 +171,11 @@ public class Unit
 	@Override
 	public void setAssessmentWeights(int assignment1Weight, int assignment2Weight, int examWeight)
 	{
-		boolean assignment1INotInRange	= assignment1Weight < 0 || assignment1Weight > 100;
-		boolean assignment2IsNotInRange	= assignment2Weight < 0 || assignment2Weight > 100;
-		boolean examIsNotInRange		= examWeight		< 0 || examWeight		 > 100;
+		boolean assignment1IsValid	= assignment1Weight < 0 || assignment1Weight > 100;
+		boolean assignment2IsValid	= assignment2Weight < 0 || assignment2Weight > 100;
+		boolean examIsValide		= examWeight		< 0 || examWeight		 > 100;
 		
-		if (assignment1INotInRange || assignment2IsNotInRange || examIsNotInRange )
+		if (!assignment1IsValid || !assignment2IsValid || !examIsValide)
 				throw new RuntimeException ("Assessment weights cant be less than zero or greater than 100");
 
 		
@@ -222,11 +222,11 @@ public class Unit
 	{
 		float total = assignment1Mark + assignment2Mark + exam1Mark;
 
-		boolean assignment1INotInRange	= assignment1Mark	< 0	|| assignment1Mark  > assignment1Weight_;
-		boolean assignment2IsNotInRange	= assignment2Mark	< 0	|| assignment2Mark  > assignment2Weight_;
-		boolean examIsNotInRange		= exam1Mark			< 0	|| exam1Mark		> examWeight_;
+		boolean assignment1IsValid	= assignment1Mark	>= 0	|| assignment1Mark  <= assignment1Weight_;
+		boolean assignment2IsValid	= assignment2Mark	>= 0	|| assignment2Mark  <= assignment2Weight_;
+		boolean examIsValid			= exam1Mark			>= 0	|| exam1Mark		<= examWeight_;
 		
-		if (assignment1INotInRange || assignment2IsNotInRange || examIsNotInRange)
+		if (!assignment1IsValid || !assignment2IsValid || !examIsValid)
 			throw new RuntimeException("marks cannot be less than zero or greater than assessment weights");
 		
 		if		(total < additionalExaminationCutoff_)	return "FL";
