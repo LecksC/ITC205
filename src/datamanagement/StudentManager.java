@@ -37,12 +37,16 @@ public class StudentManager
         }
         return createStudent(studentId);		
     }
+    
+    private Element getRootElement() {
+    	return XMLManager.getInstance().getDocument().getRootElement();
+    }
 
 
 
     private Element getStudentElement(Integer studentId)
     {
-		List<Element> elements = (List<Element>) XMLManager.getInstance().getDocument().getRootElement().getChild("studentTable").getChildren("student");
+		List<Element> elements = (List<Element>) getRootElement().getChild("studentTable").getChildren("student");
         for (Element element : elements) {
             if (studentId.toString().equals(element.getAttributeValue("sid"))) {
                 return element;

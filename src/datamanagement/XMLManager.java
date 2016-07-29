@@ -70,7 +70,8 @@ public class XMLManager
             return (Element[]) records;
     	}
 
-        throw new Exception("DBMD: getTableElements : failed to retrieve elements from " + tableName);
+        throw new Exception("DBMD: getTableElements : " +
+                            "failed to retrieve elements from " + tableName);
     }
 
 
