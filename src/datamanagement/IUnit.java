@@ -2,39 +2,33 @@ package datamanagement;
 
 public interface IUnit
 {
-	public String getUnitCode();
-	public void	  setUnitCode(String unitCode);
-	
-	public String getUnitName();
-	public void   setUnitName(String unitName);
-	
-	public float getAdditionalExaminationCutoff();
-	public void  setAdditionalExaminationCutoff(float cutoff);
+    public String getUnitCode();
+    public String getUnitName();
 
-	public float getPassCutoff();
-	public void  setPassCutoff(float cutoff);
+    public float getAdditionalExaminationCutoff();
+    public void setAdditionalExaminationCutoff(float cutoff);
 
-	public float getCreditCutoff();
-	public void  setCreditCutoff(float cutoff);
+    public float getPassCutoff();
+    public void setPassCutoff(float cutoff);
 
-	public float getDistinctionCutoff();
-	public void  setDistinctionCutoff(float cutoff);
+    public float getCreditCutoff();
+    public void setCreditCutoff(float cutoff);
 
-	public float getHighDistinctionCutoff();
-	public void  setHighDistinctionCutoff(float cutoff);
+    public float getDistinctionCutoff();
+    public void setDistinctionCutoff(float cutoff);
 
-	public int  getAssignment1Weight();
-	public int  getAssignment2Weight();
-	public int  getExamWeight();
-	public void setAssessmentWeights(int assignment1Weight, int assignment2Weight, int examWeight);
+    public float getHighDistinctionCutoff();
+    public void setHighDistinctionCutoff(float cutoff);
 
-	public String getGrade(float assignment1Grade, float assignment2Grade, float examGrade);
+    public int getAssignment1Weight();
+    public int getAssignment2Weight();
+    public int getExamWeight();
+    public void setAssessmentWeights(int assignment1Weight, int assignment2Weight, int examWeight);
 
-	public void addStudentRecord(IStudentUnitRecord record);
-	public IStudentUnitRecord getStudentRecord(int studentID);
+    public String getGrade(float assignment1Grade, float assignment2Grade, float examGrade);
 
-	public StudentUnitRecordList listStudentRecords();
-	
-	
-	
+    public void addStudentRecord(IStudentUnitRecord record);
+    public IStudentUnitRecord getStudentRecord(int studentID);
+
+    public StudentUnitRecordList listStudentRecords();
 }
