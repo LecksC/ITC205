@@ -1,5 +1,7 @@
 package datamanagement;
 
+import java.util.ArrayList;
+
 public class StudentProxy
 implements IStudent
 {
@@ -7,6 +9,8 @@ implements IStudent
     private String firstName_;
     private String lastName_;
     private StudentManager studentManager_;
+
+
 
     public StudentProxy(Integer studentId, String firstName, String lastName)
     {
@@ -67,7 +71,7 @@ implements IStudent
 
 
 
-    public StudentUnitRecordList getUnitRecords()
+    public ArrayList<IStudentUnitRecord> getUnitRecords()
     {
         return studentManager_.getStudent(studentId_).getUnitRecords();
     }

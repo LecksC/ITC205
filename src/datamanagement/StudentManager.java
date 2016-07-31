@@ -8,12 +8,12 @@ import java.util.List;
 public class StudentManager
 {
     private static StudentManager instance_ = null;
-    private StudentMap students;
-    private HashMap<String, StudentMap> studentsByUnitCode_;
+    private HashMap<Integer, IStudent> studentsByStudentId_;
+    private HashMap<String, HashMap<Integer, IStudent>> studentsByUnitCode_;
 
     private StudentManager()
     {
-    	students = new StudentMap();
+    	studentsByStudentId_ = new HashMap<>();
     	studentsByUnitCode_ = new HashMap<>();
     }
 
@@ -31,7 +31,7 @@ public class StudentManager
 
     public IStudent getStudent(Integer studentId)
     {
-        IStudent student = students.get(studentId);
+        IStudent student = studentsByStudentId_.get(studentId);
         if (student != null) {
             return student;
         }
@@ -72,7 +72,7 @@ public class StudentManager
             		                       lastName,
             		                       studentRecordList);
             
-            students.put(student.getStudentId(), student);
+            studentsByStudentId_.put(student.getStudentId(), student);
             return student;
         }
         throw new RuntimeException("DBMD: createStudent : student not in file");
@@ -93,18 +93,21 @@ public class StudentManager
 
 
 
-    public StudentMap getStudentsByUnit(String unitCode)
+    public HashMap<Integer, IStudent> getStudentsByUnit(String unitCode)
     {
-        StudentMap studentMap = studentsByUnitCode_.get(unitCode);
+    	HashMap<Integer, IStudent> studentMap = studentsByUnitCode_.get(unitCode);
         if (studentMap != null) {
             return studentMap;
         }
-        studentMap = new StudentMap();
+        
+        studentMap = new HashMap<Integer, IStudent>();
         StudentUnitRecordList studentUnitRecords = StudentUnitRecordManager.instance().getRecordsByUnit(unitCode);
+
         for (IStudentUnitRecord studentUnitRecord : studentUnitRecords) {
         	IStudent student = createStudentProxy(new Integer(studentUnitRecord.getStudentID()));
         	studentMap.put(student.getStudentId(), student);
         }
+
         studentsByUnitCode_.put(unitCode, studentMap);
         return studentMap;
 	}
