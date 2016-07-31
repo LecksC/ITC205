@@ -1,10 +1,12 @@
 package datamanagement;
 
-public class ListStudentsControl
+import java.util.HashMap;
+
+public class ListStudentsCTL
 {
     private StudentManager studentManager_;
 
-    public ListStudentsControl()
+    public ListStudentsCTL()
     {
         studentManager_ = StudentManager.getInstance();
     }
@@ -14,7 +16,7 @@ public class ListStudentsControl
     public void listStudents(IStudentLister studentLister, String unitCode)
     {
         studentLister.clearStudents();
-        StudentMap students = studentManager_.getStudentsByUnit(unitCode);
+        HashMap<Integer, IStudent> students = studentManager_.getStudentsByUnit(unitCode);
         for (Integer studentId : students.keySet()) {
             studentLister.addStudent(students.get(studentId));
         }

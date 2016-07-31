@@ -1,28 +1,33 @@
 package datamanagement;
 
+import java.util.ArrayList;
+
 public class Student
 implements IStudent
 {
     private Integer studentId_;
     private String firstName_;
     private String lastName_;
-    private StudentUnitRecordList studentUnitRecords_;
+    private ArrayList<IStudentUnitRecord> studentUnitRecords_;
 
-    public Student(Integer studentId, String firstName, String lastName, StudentUnitRecordList studentUnitRecordList)
+
+
+    public Student(Integer studentId, String firstName, String lastName,
+                   ArrayList<IStudentUnitRecord> studentUnitRecords)
     {
         studentId_ = studentId;
-        setFirstName(firstName);
-        setLastName(lastName);
-        if (studentUnitRecordList == null)
-            studentUnitRecords_ = new StudentUnitRecordList();
+        firstName = firstName_;
+        lastName = lastName_;
+        if (studentUnitRecords == null)
+            studentUnitRecords_ = new ArrayList<>();
         else {
-            studentUnitRecords_ = studentUnitRecordList;
+            studentUnitRecords_ = studentUnitRecords;
         }
     }
 
 
 
-    public Integer getStudentId() 
+    public Integer getStudentId()
     {
         return studentId_;
     }
@@ -76,7 +81,7 @@ implements IStudent
 
 
 
-    public StudentUnitRecordList getUnitRecords()
+    public ArrayList<IStudentUnitRecord> getUnitRecords()
     {
         return studentUnitRecords_;
     }
