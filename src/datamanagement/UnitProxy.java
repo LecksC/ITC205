@@ -120,9 +120,9 @@ public class UnitProxy
 
 	
 
-	public void setAssessmentWeights(int assignment1Weight, int assignment2Weight, int examWgt)
+	public void setAssessmentWeights(int assignment1Weight, int assignment2Weight, int examWeight)
 	{
-		unitManager_.getUnit(unitCode_).setAssessmentWeights(assignment1Weight, assignment2Weight, examWgt);
+		unitManager_.getUnit(unitCode_).setAssessmentWeights(assignment1Weight, assignment2Weight, examWeight);
 	}
 	
 
@@ -134,9 +134,9 @@ public class UnitProxy
 	
 
 
-	public void addStudentRecord(IStudentUnitRecord record)
+	public void addStudentRecord(IStudentUnitRecord studentUnitRecord)
 	{
-		unitManager_.getUnit(unitCode_).addStudentRecord(record);
+		unitManager_.getUnit(unitCode_).addStudentRecord(studentUnitRecord);
 	}
 
 	

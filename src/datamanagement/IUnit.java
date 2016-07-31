@@ -27,7 +27,7 @@ public interface IUnit
 
     public String getGrade(float assignment1Grade, float assignment2Grade, float examGrade);
 
-    public void addStudentRecord(IStudentUnitRecord record);
+    public void addStudentRecord(IStudentUnitRecord studentUnitRecord);
     public IStudentUnitRecord getStudentRecord(int studentID);
 
     public StudentUnitRecordList listStudentRecords();

@@ -164,9 +164,9 @@ implements IUnit
 
 
 
-    public void addStudentRecord(IStudentUnitRecord record)
+    public void addStudentRecord(IStudentUnitRecord studentUnitRecord)
     {
-        studentUnitRecordList_.add(record);
+        studentUnitRecordList_.add(studentUnitRecord);
     }
 
 

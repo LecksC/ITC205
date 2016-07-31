@@ -36,7 +36,7 @@ public class UnitManager
         IUnit iUnit;
 
         for (Object unitElement : (List<?>) XMLManager.getXML().getDocument().getRootElement()
-                .getChild("unitTable").getChildren("unit")) {
+                                                      .getChild("unitTable").getChildren("unit")) {
 
             if (unitCode.equals(unitElement)) {
                 iUnit = new Unit(
@@ -67,7 +67,7 @@ public class UnitManager
         IUnit iUnit;
 
         for (Object unitElement : (List<?>) XMLManager.getXML().getDocument().getRootElement()
-                .getChild("unitTable").getChildren("unit")) {
+                                                      .getChild("unitTable").getChildren("unit")) {
             
             iUnit = new UnitProxy(
                     ((Element) unitElement).getAttributeValue("uid"),
