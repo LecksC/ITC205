@@ -1,42 +1,88 @@
 package datamanagement;
-public class StudentUnitRecordProxy implements IStudentUnitRecord {
-	private Integer studentID;
-	private String unitCode;
-	private StudentUnitRecordManager mngr;
-	public StudentUnitRecordProxy( Integer id, String code ) 
-	{
-		this.studentID = id;
-		this.unitCode = code;
-		this.mngr = StudentUnitRecordManager.getInstance();
-	}
-	public Integer getStudentID() { 
-		return studentID;
-	}
-	
-	public String getUnitCode() { 
-		return unitCode; 
-	}
-	public void setAsg1(float mark) {
-		mngr.getStudentUnitRecord( studentID, unitCode ).setAsg1(mark);
-	}
-	public float getAsg1() 
-	{
-		return mngr.getStudentUnitRecord( studentID, unitCode ).getAsg1();
-	}
-	public void setAsg2(float mark) { 
-		mngr.getStudentUnitRecord( studentID, unitCode ).setAsg2(mark);
-	}
-	public float getAsg2() {
-		return mngr.getStudentUnitRecord( studentID, unitCode ).getAsg2();
-	}
-	public void setExam(float mark) {
-		mngr.getStudentUnitRecord( studentID, unitCode ).setExam(mark);
-	}
-	public float getExam() 
-	{
-		return mngr.getStudentUnitRecord( studentID, unitCode ).getExam();
-	}
-	public float getTotal() {
-		return mngr.getStudentUnitRecord( studentID, unitCode ).getTotal();
-	}
+
+public class StudentUnitRecordProxy
+implements IStudentUnitRecord
+{
+    private Integer studentId_;
+    private String unitCode_;
+    private StudentUnitRecordManager manager_;
+
+
+
+    public StudentUnitRecordProxy(Integer id, String code)
+    {
+        this.studentId_ = id;
+        this.unitCode_ = code;
+        this.manager_ = StudentUnitRecordManager.getInstance();
+    }
+
+
+
+    public Integer getStudentID()
+    {
+        return studentId_;
+    }
+
+
+
+    public String getUnitCode()
+    {
+        return unitCode_;
+    }
+
+
+
+    public void setAssignment1Mark(float mark)
+    {
+        getRecord().setAssignment1Mark(mark);
+    }
+
+
+
+    public float getAssignment1Mark()
+    {
+        return getRecord().getAssignment1Mark();
+    }
+
+
+
+    public void setAssignment2Mark(float mark)
+    {
+        getRecord().setAssignment2Mark(mark);
+    }
+
+
+
+    public float getAssignment2Mark()
+    {
+        return getRecord().getAssignment2Mark();
+    }
+
+
+
+    public void setExamMark(float mark)
+    {
+        getRecord().setExamMark(mark);
+    }
+
+
+
+    public float getExamMark()
+    {
+        return getRecord().getExamMark();
+    }
+
+
+
+    public float getTotalMark()
+    {
+        return getRecord().getTotalMark();
+    }
+
+
+
+    private IStudentUnitRecord getRecord()
+    {
+        return manager_.getStudentUnitRecord(studentId_, unitCode_);
+    }
 }
