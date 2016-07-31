@@ -1,100 +1,122 @@
 package datamanagement;
 
-public class cgCTL {
+public class cgCTL
+{
 
-	cgUI CGUI;
-	String cuc = null;
-	Integer currentStudentID = null;
-	boolean changed = false;
+    private cgUI userInterface_;
+    private String currentUnitCode_ = null;
+    private Integer currentStudentID_ = null;
+    private boolean changed_ = false;
 
-	public cgCTL() {
-	}
 
-	public void execute() {
-		CGUI = new cgUI(this);
-		CGUI.setState1(false);
 
-		CGUI.setState2(false);
-		CGUI.setState3(false);
-		CGUI.setState4(false);
-		CGUI.setState5(false);
-		CGUI.setState6(false);
-		CGUI.Refresh3();
+    public cgCTL()
+    {
+    }
 
-		ListUnitsCTL luCTL = new ListUnitsCTL();
-		luCTL.listUnits(CGUI);
-		CGUI.setVisible(true);
-		CGUI.setState1(true);
-	}
 
-	public void unitSelected(String code) {
 
-		if (code.equals("NONE"))
-			CGUI.setState2(false);
-		else {
-			ListStudentsCTL lsCTL = new ListStudentsCTL();
-			lsCTL.listStudents(CGUI, code);
-			cuc = code;
-			CGUI.setState2(true);
-		}
-		CGUI.setState3(false);
-	}
+    public void execute()
+    {
+        userInterface_ = new cgUI(this);
+        userInterface_.setUnitComboBoxEnabledAndClearError(false);
 
-	public void studentSelected(Integer id) {
-		currentStudentID = id;
-		if (currentStudentID.intValue() == 0) {
-			CGUI.Refresh3();
-			CGUI.setState3(false);
-			CGUI.setState4(false);
-			CGUI.setState5(false);
-			CGUI.setState6(false);
-		}
+        userInterface_.setStudentComboEnabledAndClearError(false);
+        userInterface_.setCheckGradeButtonEnabled(false);
+        userInterface_.setChangeButtonEnabled(false);
+        userInterface_.setMarksEditable(false);
+        userInterface_.setSaveEnabled(false);
+        userInterface_.clearStudentUnitRecords();
 
-		else {
-			IStudent s = StudentManager.get().getStudent(id);
+        ListUnitsCTL luCTL = new ListUnitsCTL();
+        luCTL.listUnits(userInterface_);
+        userInterface_.setVisible(true);
+        userInterface_.setUnitComboBoxEnabledAndClearError(true);
+    }
 
-			IStudentUnitRecord r = s.getUnitRecord(cuc);
 
-			CGUI.setRecord(r);
-			CGUI.setState3(true);
-			CGUI.setState4(true);
-			CGUI.setState5(false);
-			CGUI.setState6(false);
-			changed = false;
 
-		}
-	}
+    public void unitSelected(String code)
+    {
 
-	public String checkGrade(float f, float g, float h) {
-		IUnit u = UnitManager.UM().getUnit(cuc);
-		String s = u.getGrade(f, g, h);
-		CGUI.setState4(true);
-		CGUI.setState5(false);
-		if (changed) {
-			CGUI.setState6(true);
-		}
-		return s;
-	}
+        if (code.equals("NONE")) {
+            userInterface_.setStudentComboEnabledAndClearError(false);
+        }
+        else {
+            ListStudentsCTL lsCTL = new ListStudentsCTL();
+            lsCTL.listStudents(userInterface_, code);
+            currentUnitCode_ = code;
+            userInterface_.setStudentComboEnabledAndClearError(true);
+        }
+        userInterface_.setCheckGradeButtonEnabled(false);
+    }
 
-	public void enableChangeMarks() {
-		CGUI.setState4(false);
-		CGUI.setState6(false);
-		CGUI.setState5(true);
-		changed = true;
-	}
 
-	public void saveGrade(float asg1, float asg2, float exam) {
 
-		IUnit u = UnitManager.UM().getUnit(cuc);
-		IStudent s = StudentManager.get().getStudent(currentStudentID);
+    public void studentSelected(Integer studentId)
+    {
+        currentStudentID_ = studentId;
+        if (currentStudentID_.intValue() == 0) {
+            userInterface_.clearStudentUnitRecords();
+            userInterface_.setCheckGradeButtonEnabled(false);
+            userInterface_.setChangeButtonEnabled(false);
+            userInterface_.setMarksEditable(false);
+            userInterface_.setSaveEnabled(false);
+        }
+        else {
+            IStudent student = StudentManager.get().getStudent(studentId);
 
-		IStudentUnitRecord r = s.getUnitRecord(cuc);
-		r.setAsg1(asg1);
-		r.setAsg2(asg2);
-		r.setExam(exam);
-		StudentUnitRecordManager.instance().saveRecord(r);
-		CGUI.setState4(true);
-		CGUI.setState5(false);
-		CGUI.setState6(false);
-	}
+            IStudentUnitRecord record = student.getUnitRecord(currentUnitCode_);
+
+            userInterface_.setStudentUnitRecord(record);
+            userInterface_.setCheckGradeButtonEnabled(true);
+            userInterface_.setChangeButtonEnabled(true);
+            userInterface_.setMarksEditable(false);
+            userInterface_.setSaveEnabled(false);
+            changed_ = false;
+
+        }
+    }
+
+
+
+    public String checkGrade(float assignment1Mark, float assignment2Mark, float assignment3Mark)
+    {
+        IUnit unit = UnitManager.UM().getUnit(currentUnitCode_);
+        String gradeText = unit.getGrade(assignment1Mark, assignment2Mark, assignment3Mark);
+        userInterface_.setChangeButtonEnabled(true);
+        userInterface_.setMarksEditable(false);
+        if (changed_) {
+            userInterface_.setSaveEnabled(true);
+        }
+        return gradeText;
+    }
+
+
+
+    public void enableChangeMarks()
+    {
+        userInterface_.setChangeButtonEnabled(false);
+        userInterface_.setSaveEnabled(false);
+        userInterface_.setMarksEditable(true);
+        changed_ = true;
+    }
+
+
+
+    public void saveGrade(float assignment1Mark, float assignment2Mark, float examMark)
+    {
+        IStudent student = StudentManager.get().getStudent(currentStudentID_);
+        IStudentUnitRecord record = student.getUnitRecord(currentUnitCode_);
+        
+        record.setAssignment1Mark(assignment1Mark);
+        record.setAssignment2Mark(assignment2Mark);
+        record.setExamMark(examMark);
+        
+        StudentUnitRecordManager.getInstance().saveRecord(record);
+        
+        userInterface_.setChangeButtonEnabled(true);
+        userInterface_.setMarksEditable(false);
+        userInterface_.setSaveEnabled(false);
+    }
 }
