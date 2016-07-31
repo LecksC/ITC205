@@ -1,5 +1,6 @@
 package datamanagement;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.jdom.*;
 
@@ -32,7 +33,7 @@ public class UnitManager {
 		for (Element el : (List<Element>) XMLManager.getXML().getDocument()
 				.getRootElement().getChild("unitTable").getChildren("unit"))
 			if (unitCode.equals(el.getAttributeValue("uid"))) {
-				StudentUnitRecordList slist;
+				ArrayList<IStudentUnitRecord> slist;
 
 				slist = null;
 				iu = new Unit(el.getAttributeValue("uid"),
@@ -49,7 +50,7 @@ public class UnitManager {
 								el.getAttributeValue("asg2wgt")).intValue(),
 						Integer.valueOf(el.getAttributeValue("examwgt"))
 								.intValue(), StudentUnitRecordManager
-								.instance().getRecordsByUnit(unitCode));
+								.getInstance().getRecordsByUnit(unitCode));
 				UM.put(iu.getUnitCode(), iu);
 				return iu;
 			}

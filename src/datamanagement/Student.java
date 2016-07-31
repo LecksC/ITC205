@@ -1,13 +1,15 @@
 package datamanagement;
 
+import java.util.ArrayList;
+
 public class Student implements IStudent {
     private Integer id; private String fn;
             private String ln;
-private StudentUnitRecordList su;
+private ArrayList<IStudentUnitRecord> su;
 
-public Student( Integer id, String fn, String ln, StudentUnitRecordList su ) { this.id = id; this.fn = fn;
+public Student( Integer id, String fn, String ln, ArrayList<IStudentUnitRecord> su ) { this.id = id; this.fn = fn;
         this.ln = ln;this.su = 
-        su == null ? new StudentUnitRecordList() : 
+        su == null ? new ArrayList<IStudentUnitRecord>() : 
                 su;
 }
 
@@ -35,4 +37,4 @@ return null;
         
 }
 
-public StudentUnitRecordList getUnitRecords() { return su; }}
+public ArrayList<IStudentUnitRecord> getUnitRecords() { return su; }}

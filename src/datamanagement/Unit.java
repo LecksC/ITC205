@@ -1,5 +1,7 @@
 package datamanagement;
 
+import java.util.ArrayList;
+
 public class Unit implements IUnit {
 	private String uc;
 	private String UN;
@@ -10,10 +12,10 @@ public class Unit implements IUnit {
 	private float co5;
 	private int a1, a2, ex;
 	
-	private StudentUnitRecordList rs;
+	private ArrayList<IStudentUnitRecord> rs;
 
 	public Unit(String UC, String un, float f1, float f2, float f3, float f4,
-			float f5, int i1, int i2, int i3, StudentUnitRecordList rl) {
+			float f5, int i1, int i2, int i3, ArrayList<IStudentUnitRecord> rl) {
 
 		uc = UC;
 		UN = un;
@@ -23,7 +25,7 @@ public class Unit implements IUnit {
 		co3 = f4;
 		this.co5 = f5;
 		this.setAssessmentWeights(i1, i2, i3);
-		rs = rl == null ? new StudentUnitRecordList() : rl;
+		rs = rl == null ? new ArrayList<IStudentUnitRecord>() : rl;
 	}
 
 	public String getUnitCode() {
@@ -92,7 +94,7 @@ public class Unit implements IUnit {
 		return null;
 	}
 
-	public StudentUnitRecordList listStudentRecords() {
+	public ArrayList<IStudentUnitRecord> listStudentRecords() {
 		return rs;
 	}
 

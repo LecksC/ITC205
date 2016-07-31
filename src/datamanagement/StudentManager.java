@@ -1,17 +1,23 @@
 package datamanagement;
 
-import org.jdom.*;
+
+import java.util.ArrayList;
 import java.util.List;
+import org.jdom.*;
+
+
 public class StudentManager {
     private static StudentManager self = null;
 
     
-    private StudentMap sm;private java.util.HashMap<String, StudentMap> um;
-public static StudentManager get() {
+    private StudentMap sm;
+    private java.util.HashMap<String, StudentMap> um;
+    public static StudentManager get() {
         if (self == null) 
-            
-self = new StudentManager(); return self; }
-private StudentManager() {
+        	self = new StudentManager(); 
+        return self; 
+    }
+    private StudentManager() {
 
     
             sm = new StudentMap();
@@ -30,7 +36,7 @@ return el;return null;
                     IStudent is;
         Element el = getStudentElement(id);
         if (el != null) {
-            StudentUnitRecordList rlist = StudentUnitRecordManager.instance().getRecordsByStudent(id);
+        	ArrayList<IStudentUnitRecord> rlist = StudentUnitRecordManager.getInstance().getRecordsByStudent(id);
     is = new Student(new Integer(el.getAttributeValue("sid")),el.getAttributeValue("fname"),el.getAttributeValue("lname"),rlist);
 
     
@@ -59,7 +65,7 @@ throw new RuntimeException("DBMD: createStudent : student not in file");}
 
 s = new StudentMap();
 IStudent is;
-    StudentUnitRecordList ur = StudentUnitRecordManager.instance().getRecordsByUnit(uc);
+ArrayList<IStudentUnitRecord> ur = StudentUnitRecordManager.getInstance().getRecordsByUnit(uc);
         for (IStudentUnitRecord S : ur) {
             
             
