@@ -20,12 +20,9 @@ public class StudentUnitRecordManager
 
     private StudentUnitRecordManager()
     {
-        recordByStudentIdAndUnitCode_ =
-                                      new HashMap<String, IStudentUnitRecord>();
-        recordsByUnitCode_ =
-                           new HashMap<String, List<IStudentUnitRecord>>();
-        recordsByStudentId_ =
-                            new HashMap<Integer, List<IStudentUnitRecord>>();
+        recordByStudentIdAndUnitCode_ = new HashMap<String, IStudentUnitRecord>();
+        recordsByUnitCode_ = new HashMap<String, List<IStudentUnitRecord>>();
+        recordsByStudentId_ = new HashMap<Integer, List<IStudentUnitRecord>>();
     }
 
 
@@ -40,8 +37,7 @@ public class StudentUnitRecordManager
 
 
 
-    public IStudentUnitRecord getStudentUnitRecord(Integer studentId,
-                                                   String unitCode)
+    public IStudentUnitRecord getStudentUnitRecord(Integer studentId, String unitCode)
     {
         String hash = getRecordHash(studentId, unitCode);
         IStudentUnitRecord record = recordByStudentIdAndUnitCode_.get(hash);
@@ -80,21 +76,16 @@ public class StudentUnitRecordManager
 
     public void saveRecord(IStudentUnitRecord record)
     {
-        List<Element> databaseRecords = findRecords(record.getStudentID(),
-                                                    record.getUnitCode());
+        List<Element> databaseRecords = findRecords(record.getStudentID(), record.getUnitCode());
         if (databaseRecords.size() == 0) {
-            throw new RuntimeException("DBMD: saveRecord : no such student"
-                                       + " record in data");
+            throw new RuntimeException("DBMD: saveRecord : no such student" + " record in data");
 
         }
         Element databaseRecord = databaseRecords.get(0);
 
-        databaseRecord.setAttribute("asg1",
-                                    Float.toString(record.getAssignment1Mark()));
-        databaseRecord.setAttribute("asg2",
-                                    Float.toString(record.getAssignment2Mark()));
-        databaseRecord.setAttribute("exam",
-                                    Float.toString(record.getExamMark()));
+        databaseRecord.setAttribute("asg1", Float.toString(record.getAssignment1Mark()));
+        databaseRecord.setAttribute("asg2", Float.toString(record.getAssignment2Mark()));
+        databaseRecord.setAttribute("exam", Float.toString(record.getExamMark()));
 
         XMLManager.getXML().saveDocument();
         return;
@@ -102,8 +93,7 @@ public class StudentUnitRecordManager
 
 
 
-    private IStudentUnitRecord loadStudentUnitRecord(Integer studentId,
-                                                     String unitCode)
+    private IStudentUnitRecord loadStudentUnitRecord(Integer studentId, String unitCode)
     {
         List<Element> databaseRecords = findRecords(studentId, unitCode);
         if (databaseRecords.size() == 0) {
@@ -111,11 +101,10 @@ public class StudentUnitRecordManager
         }
 
         Element databaseRecord = databaseRecords.get(0);
-        IStudentUnitRecord newRecord =
-                                     new StudentUnitRecord(studentId, unitCode,
-                                                           new Float(databaseRecord.getAttributeValue("asg1")),
-                                                           new Float(databaseRecord.getAttributeValue("asg2")),
-                                                           new Float(databaseRecord.getAttributeValue("exam")));
+        IStudentUnitRecord newRecord = new StudentUnitRecord(studentId, unitCode,
+                                                             new Float(databaseRecord.getAttributeValue("asg1")),
+                                                             new Float(databaseRecord.getAttributeValue("asg2")),
+                                                             new Float(databaseRecord.getAttributeValue("exam")));
 
         String hash = getRecordHash(studentId, unitCode);
         recordByStudentIdAndUnitCode_.put(hash, newRecord);
@@ -127,8 +116,7 @@ public class StudentUnitRecordManager
 
     private List<IStudentUnitRecord> loadRecordsByUnit(String unitCode)
     {
-        List<IStudentUnitRecord> unitRecords =
-                                             new ArrayList<IStudentUnitRecord>();
+        List<IStudentUnitRecord> unitRecords = new ArrayList<IStudentUnitRecord>();
         List<Element> databaseRecords = findRecords(null, unitCode);
 
         if (databaseRecords.size() == 0) {
@@ -148,8 +136,7 @@ public class StudentUnitRecordManager
 
     private List<IStudentUnitRecord> loadRecordsByStudent(Integer studentId)
     {
-        List<IStudentUnitRecord> records =
-                                              new ArrayList<IStudentUnitRecord>();
+        List<IStudentUnitRecord> records = new ArrayList<IStudentUnitRecord>();
         List<Element> databaseRecords = findRecords(studentId, null);
 
         if (databaseRecords.size() == 0) {
@@ -170,21 +157,18 @@ public class StudentUnitRecordManager
     private List<Element> findRecords(Integer studentId, String unitCode)
     {
         List<Element> matchingRecords = new ArrayList<Element>();
-        Element[] databaseRecords =
-                                  getDatabaseRecords("studentUnitRecordTable");
+        Element[] databaseRecords = getDatabaseRecords("studentUnitRecordTable");
         for (Element databaseRecord : databaseRecords) {
 
             if (studentId != null) {
-                Integer databaseStudentId =
-                                          new Integer(databaseRecord.getAttributeValue("sid"));
+                Integer databaseStudentId = new Integer(databaseRecord.getAttributeValue("sid"));
                 if (!studentId.equals(databaseStudentId)) {
                     continue;
                 }
             }
 
             if (unitCode != null) {
-                String databaseUnitCode =
-                                        databaseRecord.getAttributeValue("uid");
+                String databaseUnitCode = databaseRecord.getAttributeValue("uid");
                 if (!unitCode.equals(databaseUnitCode)) {
                     continue;
                 }
@@ -208,12 +192,10 @@ public class StudentUnitRecordManager
     // This should be in XMLManager
     private Element[] getDatabaseRecords(String tableName)
     {
-        Object[] records = XMLManager.getXML().getDocument().getRootElement()
-                                     .getChild(tableName).getChildren("record")
+        Object[] records = XMLManager.getXML().getDocument().getRootElement().getChild(tableName).getChildren("record")
                                      .toArray();
 
-        Element[] elementArray = Arrays.copyOf(records, records.length,
-                                               Element[].class);
+        Element[] elementArray = Arrays.copyOf(records, records.length, Element[].class);
 
         return elementArray;
     }

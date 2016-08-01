@@ -9,8 +9,7 @@ implements IStudentUnitRecord
 
 
 
-    public StudentUnitRecord(Integer studentId, String unitCode, float assignment1Mark, float assignment2Mark,
-                             float examMark)
+    public StudentUnitRecord(Integer studentId, String unitCode, float assignment1Mark, float assignment2Mark, float examMark)
     {
         this.studentId_ = studentId;
         this.unitCode_ = unitCode;

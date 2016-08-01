@@ -46,7 +46,7 @@ public class CheckGradesControl
             currentUnitCode_ = code;
             userInterface_.setStudentComboEnabledAndClearError(true);
         }
-        
+
         userInterface_.setCheckGradeButtonEnabled(false);
     }
 
@@ -55,7 +55,7 @@ public class CheckGradesControl
     public void studentSelected(Integer studentId)
     {
         currentStudentID_ = studentId;
-        
+
         if (currentStudentID_.intValue() == 0) {
             userInterface_.clearStudentUnitRecords();
             userInterface_.setCheckGradeButtonEnabled(false);
@@ -83,7 +83,7 @@ public class CheckGradesControl
     {
         IUnit unit = UnitManager.UM().getUnit(currentUnitCode_);
         String gradeText = unit.getGrade(assignment1Mark, assignment2Mark, assignment3Mark);
-        
+
         userInterface_.setChangeButtonEnabled(true);
         userInterface_.setMarksEditable(false);
         if (changed_) {
@@ -108,13 +108,13 @@ public class CheckGradesControl
     {
         IStudent student = StudentManager.get().getStudent(currentStudentID_);
         IStudentUnitRecord record = student.getUnitRecord(currentUnitCode_);
-        
+
         record.setAssignment1Mark(assignment1Mark);
         record.setAssignment2Mark(assignment2Mark);
         record.setExamMark(examMark);
-        
+
         StudentUnitRecordManager.getInstance().saveRecord(record);
-        
+
         userInterface_.setChangeButtonEnabled(true);
         userInterface_.setMarksEditable(false);
         userInterface_.setSaveEnabled(false);
