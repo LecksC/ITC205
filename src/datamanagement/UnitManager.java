@@ -1,5 +1,6 @@
 package datamanagement;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.jdom.*;
 
@@ -29,10 +30,10 @@ public class UnitManager {
 
 		IUnit iu;
 
-		for (Element el : (List<Element>) XMLManager.getXML().getDocument()
+		for (Element el : (List<Element>) XMLManager.getInstance().getDocument()
 				.getRootElement().getChild("unitTable").getChildren("unit"))
 			if (unitCode.equals(el.getAttributeValue("uid"))) {
-				StudentUnitRecordList slist;
+			    ArrayList<IStudentUnitRecord> slist;
 
 				slist = null;
 				iu = new Unit(el.getAttributeValue("uid"),
@@ -63,7 +64,7 @@ public class UnitManager {
 		IUnit iu;
 
 		uM = new UnitMap();
-		for (Element el : (List<Element>) XMLManager.getXML().getDocument()
+		for (Element el : (List<Element>) XMLManager.getInstance().getDocument()
 				.getRootElement().getChild("unitTable").getChildren("unit")) {
 			iu = new UnitProxy(el.getAttributeValue("uid"),
 					el.getAttributeValue("name"));

@@ -8,9 +8,9 @@ import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class cgUI extends javax.swing.JFrame implements IUnitLister,
+public class ControlUserInterface extends javax.swing.JFrame implements IUnitLister,
 		IStudentLister {
-	private cgCTL ctl;
+	private CheckGradesControl ctl;
 	private javax.swing.DefaultComboBoxModel uM;
 	private javax.swing.DefaultComboBoxModel rM;
 	float f1;
@@ -18,7 +18,7 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister,
 	float f3;
 	Integer sid;
 
-	public cgUI(cgCTL ctl) {
+	public ControlUserInterface(CheckGradesControl ctl) {
 		this.ctl = ctl;
 		uM = new javax.swing.DefaultComboBoxModel(new String[0]);
 		rM = new javax.swing.DefaultComboBoxModel(new String[0]);
@@ -386,7 +386,7 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister,
 	}
 
 	public void addStudent(IStudent student) {
-		rM.addElement(student.getId().toString() + " : "
+		rM.addElement(student.getStudentId().toString() + " : "
 				+ student.getFirstName() + " " + student.getLastName());
 	}
 

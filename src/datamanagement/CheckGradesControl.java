@@ -1,17 +1,17 @@
 package datamanagement;
 
-public class cgCTL {
+public class CheckGradesControl {
 
-	cgUI CGUI;
+	ControlUserInterface CGUI;
 	String cuc = null;
 	Integer currentStudentID = null;
 	boolean changed = false;
 
-	public cgCTL() {
+	public CheckGradesControl() {
 	}
 
 	public void execute() {
-		CGUI = new cgUI(this);
+		CGUI = new ControlUserInterface(this);
 		CGUI.setState1(false);
 
 		CGUI.setState2(false);
@@ -51,7 +51,7 @@ public class cgCTL {
 		}
 
 		else {
-			IStudent s = StudentManager.get().getStudent(id);
+			IStudent s = StudentManager.getInstance().getStudent(id);
 
 			IStudentUnitRecord r = s.getUnitRecord(cuc);
 
