@@ -6,6 +6,8 @@ public class ListUnitsCTL
 {
     private UnitManager unitManager_;
 
+
+
     public ListUnitsCTL()
     {
         unitManager_ = UnitManager.unitManager();
@@ -16,7 +18,7 @@ public class ListUnitsCTL
     public void listUnits(IUnitLister lister)
     {
         lister.clearUnits();
-        HashMap<String,IUnit> unitsByUnitCode = unitManager_.getUnits();
+        HashMap<String, IUnit> unitsByUnitCode = unitManager_.getUnits();
 
         for (String unitCode : unitsByUnitCode.keySet()) {
             lister.addUnit(unitsByUnitCode.get(unitCode));

@@ -204,15 +204,20 @@ implements IUnit
 
         if (total < additionalExaminationCutoff_) {
             return "FL";
-        } else if (total < passCutoff_) {
+        }
+        else if (total < passCutoff_) {
             return "AE";
-        } else if (total < creditCutoff_) {
+        }
+        else if (total < creditCutoff_) {
             return "PS";
-        } else if (total < distinctionCutoff_) {
+        }
+        else if (total < distinctionCutoff_) {
             return "CR";
-        } else if (total < highDistinctionCutoff_) {
+        }
+        else if (total < highDistinctionCutoff_) {
             return "DI";
-        } else {
+        }
+        else {
             return "HD";
         }
     }
