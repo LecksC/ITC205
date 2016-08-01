@@ -59,9 +59,9 @@ implements IUnitLister,	IStudentLister
 	
 	
 	
-	public CheckGradesUserInterface(cgCTL ctl) 
+	public CheckGradesUserInterface(cgCTL control) 
 	{
-		checkGradesControl_ = ctl;
+		checkGradesControl_ = control;
 		unitComboBoxModel_ = new DefaultComboBoxModel<String>(new String[0]);
 		studentComboBoxModel_ = new DefaultComboBoxModel<String>(new String[0]);
 		initializeComponents();
