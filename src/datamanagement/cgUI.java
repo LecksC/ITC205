@@ -1,6 +1,5 @@
 package datamanagement;
 
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -10,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
@@ -24,8 +24,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class cgUI 
-	extends JFrame 
-	implements IUnitLister,	IStudentLister 
+extends JFrame 
+implements IUnitLister,	IStudentLister 
 {
 	private static final long serialVersionUID = 5712125091485034830L;
 	
@@ -57,6 +57,8 @@ public class cgUI
 	private JTextField textFieldAssignment2Mark_;
 	private JTextField textFieldExamMark_;
 	
+	
+	
 	public cgUI(cgCTL ctl) 
 	{
 		checkGradesController_ = ctl;
@@ -68,7 +70,109 @@ public class cgUI
 		labelError_.setText("");
 	}
 
+	
+	
+    public void clearUnits() 
+    {
+        unitComboBoxModel_.removeAllElements();
+        unitComboBoxModel_.addElement("<none selected>");
+        clearStudents();
+    }
+    
+    
 
+    public void addUnit(IUnit unit) 
+    {
+        unitComboBoxModel_.addElement(unit.getUnitCode());
+    }
+
+    
+    
+    public void setUnitComboBoxEnabledAndClearError(boolean enabled) 
+    {
+        comboBoxUnit_.setEnabled(enabled);
+        labelError_.setText("");
+    }
+
+    
+    
+    public void clearStudents() 
+    {
+        studentComboBoxModel_.removeAllElements();
+        studentComboBoxModel_.addElement("<none selected>");
+    }
+
+    
+    
+    public void addStudent(IStudent student) 
+    {
+        studentComboBoxModel_.addElement(student.getID().toString() + 
+                                         " : " + student.getFirstName() + " " + student.getLastName());
+    }
+
+    
+    
+    public void setStudentComboEnabledAndClearError(boolean enabled)
+    {
+        comboBoxStudent_.setEnabled(enabled);
+        labelError_.setText("");
+    }
+
+    
+    
+    public void setStudentUnitRecord(IStudentUnitRecord record) 
+    {
+        textFieldAssignment1Mark_.setText(new Float(record.getAssignment1Mark()).toString());
+        textFieldAssignment2Mark_.setText(new Float(record.getAssignment2Mark()).toString());
+        textFieldExamMark_.setText(new Float(record.getExamMark()).toString());
+        labelGrade_.setText("");
+    }
+
+    
+    
+    public void clearStudentUnitRecords() 
+    {
+        textFieldAssignment1Mark_.setText("");
+        textFieldAssignment2Mark_.setText("");
+        textFieldExamMark_.setText("");
+        labelGrade_.setText("");
+        labelError_.setText("");
+        textFieldAssignment1Mark_.setEditable(false);
+        textFieldAssignment2Mark_.setEditable(false);
+        textFieldExamMark_.setEditable(false);
+    }
+
+    
+    
+    public void setCheckGradeButtonEnabled(boolean enabled) 
+    {
+        buttonCheckGrade_.setEnabled(enabled);
+    }
+
+    
+    
+    public void setChangeButtonEnabled(boolean enabled) 
+    {
+        buttonChange_.setEnabled(enabled);
+    }
+
+    
+    
+    public void setMarksEditable(boolean enabled) 
+    {
+        textFieldAssignment1Mark_.setEditable(enabled);
+        textFieldAssignment2Mark_.setEditable(enabled);
+        textFieldExamMark_.setEditable(enabled);
+    }
+
+    
+    
+    public void setSaveEnabled(boolean enabled) 
+    {
+        buttonSave_.setEnabled(enabled);
+    }
+    
+    
 	
 	private void initializeComponents() 
 	{
@@ -411,106 +515,5 @@ public class cgUI
 		catch (RuntimeException re) {
 			labelError_.setText(re.getMessage());
 		}
-	}
-
-	
-	
-	public void clearUnits() 
-	{
-		unitComboBoxModel_.removeAllElements();
-		unitComboBoxModel_.addElement("<none selected>");
-		clearStudents();
-	}
-	
-	
-
-	public void addUnit(IUnit unit) 
-	{
-		unitComboBoxModel_.addElement(unit.getUnitCode());
-	}
-
-	
-	
-	public void setUnitComboBoxEnabledAndClearError(boolean enabled) 
-	{
-		comboBoxUnit_.setEnabled(enabled);
-		labelError_.setText("");
-	}
-
-	
-	
-	public void clearStudents() 
-	{
-		studentComboBoxModel_.removeAllElements();
-		studentComboBoxModel_.addElement("<none selected>");
-	}
-
-	
-	
-	public void addStudent(IStudent student) 
-	{
-		studentComboBoxModel_.addElement(student.getID().toString() + " : " + student.getFirstName() + " " + student.getLastName());
-	}
-
-	
-	
-	public void setStudentComboEnabledAndClearError(boolean enabled)
-	{
-		comboBoxStudent_.setEnabled(enabled);
-		labelError_.setText("");
-	}
-
-	
-	
-	public void setStudentUnitRecord(IStudentUnitRecord record) 
-	{
-		textFieldAssignment1Mark_.setText(new Float(record.getAssignment1Mark()).toString());
-		textFieldAssignment2Mark_.setText(new Float(record.getAssignment2Mark()).toString());
-		textFieldExamMark_.setText(new Float(record.getExamMark()).toString());
-		labelGrade_.setText("");
-	}
-
-	
-	
-	public void clearStudentUnitRecords() 
-	{
-		textFieldAssignment1Mark_.setText("");
-		textFieldAssignment2Mark_.setText("");
-		textFieldExamMark_.setText("");
-		labelGrade_.setText("");
-		labelError_.setText("");
-		textFieldAssignment1Mark_.setEditable(false);
-		textFieldAssignment2Mark_.setEditable(false);
-		textFieldExamMark_.setEditable(false);
-	}
-
-	
-	
-	public void setCheckGradeButtonEnabled(boolean enabled) 
-	{
-		buttonCheckGrade_.setEnabled(enabled);
-	}
-
-	
-	
-	public void setChangeButtonEnabled(boolean enabled) 
-	{
-		buttonChange_.setEnabled(enabled);
-	}
-
-	
-	
-	public void setMarksEditable(boolean enabled) 
-	{
-		textFieldAssignment1Mark_.setEditable(enabled);
-		textFieldAssignment2Mark_.setEditable(enabled);
-		textFieldExamMark_.setEditable(enabled);
-	}
-
-	
-	
-	public void setSaveEnabled(boolean enabled) 
-	{
-		buttonSave_.setEnabled(enabled);
 	}
 }
