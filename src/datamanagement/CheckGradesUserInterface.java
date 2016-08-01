@@ -29,7 +29,7 @@ implements IUnitLister,	IStudentLister
 {
 	private static final long serialVersionUID = 5712125091485034830L;
 	
-	private cgCTL checkGradesControl_;
+	private CheckGradesControl checkGradesControl_;
 	
 	private float assignment1Mark_;
 	private float assignment2Mark_;
@@ -59,7 +59,7 @@ implements IUnitLister,	IStudentLister
 	
 	
 	
-	public CheckGradesUserInterface(cgCTL control) 
+	public CheckGradesUserInterface(CheckGradesControl control) 
 	{
 		checkGradesControl_ = control;
 		unitComboBoxModel_ = new DefaultComboBoxModel<String>(new String[0]);

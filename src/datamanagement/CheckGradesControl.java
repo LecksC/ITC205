@@ -1,16 +1,15 @@
 package datamanagement;
 
-public class cgCTL
+public class CheckGradesControl
 {
-
-    private cgUI userInterface_;
+    private CheckGradesUserInterface userInterface_;
     private String currentUnitCode_ = null;
     private Integer currentStudentID_ = null;
     private boolean changed_ = false;
 
 
 
-    public cgCTL()
+    public CheckGradesControl()
     {
     }
 
@@ -18,9 +17,8 @@ public class cgCTL
 
     public void execute()
     {
-        userInterface_ = new cgUI(this);
+        userInterface_ = new CheckGradesUserInterface(this);
         userInterface_.setUnitComboBoxEnabledAndClearError(false);
-
         userInterface_.setStudentComboEnabledAndClearError(false);
         userInterface_.setCheckGradeButtonEnabled(false);
         userInterface_.setChangeButtonEnabled(false);
@@ -28,8 +26,8 @@ public class cgCTL
         userInterface_.setSaveEnabled(false);
         userInterface_.clearStudentUnitRecords();
 
-        ListUnitsCTL luCTL = new ListUnitsCTL();
-        luCTL.listUnits(userInterface_);
+        ListUnitsCTL unitListControl = new ListUnitsCTL();
+        unitListControl.listUnits(userInterface_);
         userInterface_.setVisible(true);
         userInterface_.setUnitComboBoxEnabledAndClearError(true);
     }
@@ -43,11 +41,12 @@ public class cgCTL
             userInterface_.setStudentComboEnabledAndClearError(false);
         }
         else {
-            ListStudentsCTL lsCTL = new ListStudentsCTL();
-            lsCTL.listStudents(userInterface_, code);
+            ListStudentsCTL studentListControl = new ListStudentsCTL();
+            studentListControl.listStudents(userInterface_, code);
             currentUnitCode_ = code;
             userInterface_.setStudentComboEnabledAndClearError(true);
         }
+        
         userInterface_.setCheckGradeButtonEnabled(false);
     }
 
@@ -56,6 +55,7 @@ public class cgCTL
     public void studentSelected(Integer studentId)
     {
         currentStudentID_ = studentId;
+        
         if (currentStudentID_.intValue() == 0) {
             userInterface_.clearStudentUnitRecords();
             userInterface_.setCheckGradeButtonEnabled(false);
@@ -65,7 +65,6 @@ public class cgCTL
         }
         else {
             IStudent student = StudentManager.get().getStudent(studentId);
-
             IStudentUnitRecord record = student.getUnitRecord(currentUnitCode_);
 
             userInterface_.setStudentUnitRecord(record);
@@ -84,6 +83,7 @@ public class cgCTL
     {
         IUnit unit = UnitManager.UM().getUnit(currentUnitCode_);
         String gradeText = unit.getGrade(assignment1Mark, assignment2Mark, assignment3Mark);
+        
         userInterface_.setChangeButtonEnabled(true);
         userInterface_.setMarksEditable(false);
         if (changed_) {
