@@ -36,7 +36,7 @@ return el;return null;
                     IStudent is;
         Element el = getStudentElement(id);
         if (el != null) {
-        	ArrayList<IStudentUnitRecord> rlist = StudentUnitRecordManager.getInstance().getRecordsByStudent(id);
+        	List<IStudentUnitRecord> rlist = StudentUnitRecordManager.getInstance().getRecordsByStudent(id);
     is = new Student(new Integer(el.getAttributeValue("sid")),el.getAttributeValue("fname"),el.getAttributeValue("lname"),rlist);
 
     
@@ -65,7 +65,7 @@ throw new RuntimeException("DBMD: createStudent : student not in file");}
 
 s = new StudentMap();
 IStudent is;
-ArrayList<IStudentUnitRecord> ur = StudentUnitRecordManager.getInstance().getRecordsByUnit(uc);
+List<IStudentUnitRecord> ur = StudentUnitRecordManager.getInstance().getRecordsByUnit(uc);
         for (IStudentUnitRecord S : ur) {
             
             

@@ -1,6 +1,6 @@
 package datamanagement;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IStudent {
 
@@ -15,6 +15,6 @@ public interface IStudent {
     public void addUnitRecord( IStudentUnitRecord record );
     public IStudentUnitRecord getUnitRecord( String unitCode );
 
-    public ArrayList<IStudentUnitRecord> getUnitRecords();
+    public List<IStudentUnitRecord> getUnitRecords();
 
 }

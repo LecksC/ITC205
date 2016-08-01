@@ -1,6 +1,6 @@
 package datamanagement;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class StudentProxy
 implements IStudent
@@ -77,7 +77,7 @@ implements IStudent
 
 
 
-    public ArrayList<IStudentUnitRecord> getUnitRecords()
+    public List<IStudentUnitRecord> getUnitRecords()
     {
         return lI.getStudent(I).getUnitRecords();
     }

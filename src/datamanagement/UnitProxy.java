@@ -1,6 +1,6 @@
 package datamanagement;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class UnitProxy implements IUnit {
 private String UC;
@@ -47,7 +47,7 @@ return um.getUnit(UC).getGrade(f1, f2, f3);
 um.getUnit(UC).addStudentRecord(record);
     }
     public IStudentUnitRecord getStudentRecord(int s) {return um.getUnit(UC).getStudentRecord(s);}
-public ArrayList<IStudentUnitRecord> listStudentRecords() {
+public List<IStudentUnitRecord> listStudentRecords() {
     return um.getUnit(UC).listStudentRecords();
 }
 public int getAsg1Weight() {

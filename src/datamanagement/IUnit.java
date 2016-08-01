@@ -1,6 +1,6 @@
 package datamanagement;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IUnit {
 
@@ -32,5 +32,5 @@ public interface IUnit {
     public void addStudentRecord(IStudentUnitRecord record );
     public IStudentUnitRecord getStudentRecord(int studentID );
     
-    public ArrayList<IStudentUnitRecord> listStudentRecords();
+    public List<IStudentUnitRecord> listStudentRecords();
 }

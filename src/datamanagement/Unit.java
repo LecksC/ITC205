@@ -1,6 +1,7 @@
 package datamanagement;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Unit implements IUnit {
 	private String uc;
@@ -12,10 +13,10 @@ public class Unit implements IUnit {
 	private float co5;
 	private int a1, a2, ex;
 	
-	private ArrayList<IStudentUnitRecord> rs;
+	private List<IStudentUnitRecord> rs;
 
 	public Unit(String UC, String un, float f1, float f2, float f3, float f4,
-			float f5, int i1, int i2, int i3, ArrayList<IStudentUnitRecord> rl) {
+			float f5, int i1, int i2, int i3, List<IStudentUnitRecord> rl) {
 
 		uc = UC;
 		UN = un;
@@ -94,7 +95,7 @@ public class Unit implements IUnit {
 		return null;
 	}
 
-	public ArrayList<IStudentUnitRecord> listStudentRecords() {
+	public List<IStudentUnitRecord> listStudentRecords() {
 		return rs;
 	}
 
