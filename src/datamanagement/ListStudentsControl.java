@@ -2,11 +2,11 @@ package datamanagement;
 
 import java.util.HashMap;
 
-public class ListStudentsCTL
+public class ListStudentsControl
 {
     private StudentManager studentManager_;
 
-    public ListStudentsCTL()
+    public ListStudentsControl()
     {
         studentManager_ = StudentManager.getInstance();
     }
