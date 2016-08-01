@@ -23,9 +23,8 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class CheckGradesUserInterface 
-extends JFrame 
-implements IUnitLister,    IStudentLister 
+public class CheckGradesUserInterface extends JFrame 
+implements IUnitLister, IStudentLister 
 {
     private static final long serialVersionUID = 5712125091485034830L;
     
@@ -276,21 +275,21 @@ implements IUnitLister,    IStudentLister
         assignment1MarkTextField_.setEditable(false);
         assignment1MarkTextField_.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent event) {
-                jTextFieldKeyTyped(event);
+                textEntered(event);
             }
         });
 
         assignment2MarkTextField_.setEditable(false);
         assignment2MarkTextField_.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent event) {
-                jTextFieldKeyTyped(event);
+                textEntered(event);
             }
         });
 
         examMarkTextField_.setEditable(false);
         examMarkTextField_.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent event) {
-                jTextFieldKeyTyped(event);
+                textEntered(event);
             }
         });
 
@@ -382,7 +381,7 @@ implements IUnitLister,    IStudentLister
         saveButton_.setText("Save");
         saveButton_.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                jButton2ActionPerformed(event);
+                savePressed(event);
             }
         });
 
@@ -495,7 +494,7 @@ implements IUnitLister,    IStudentLister
 
     
     
-    private void jTextFieldKeyTyped(KeyEvent event) 
+    private void textEntered(KeyEvent event) 
     {
         gradeLabel_.setText("");
         errorLabel_.setText("");
@@ -503,7 +502,7 @@ implements IUnitLister,    IStudentLister
 
     
     
-    private void jButton2ActionPerformed(ActionEvent event) 
+    private void savePressed(ActionEvent event) 
     {
         float assignment1MarkInput = new Float(assignment1MarkTextField_.getText()).floatValue();
         float assignment2MarkInput = new Float(assignment2MarkTextField_.getText()).floatValue();
@@ -512,8 +511,8 @@ implements IUnitLister,    IStudentLister
         try {
             checkGradesControl_.saveGrade(assignment1MarkInput, assignment2MarkInput, examMarkInput);
         }
-        catch (RuntimeException re) {
-            errorLabel_.setText(re.getMessage());
+        catch (RuntimeException exception) {
+            errorLabel_.setText(exception.getMessage());
         }
     }
 }
