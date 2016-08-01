@@ -23,7 +23,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class cgUI 
+public class CheckGradesUserInterface 
 extends JFrame 
 implements IUnitLister,	IStudentLister 
 {
