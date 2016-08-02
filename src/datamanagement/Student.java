@@ -16,10 +16,11 @@ implements IStudent
                    ArrayList<IStudentUnitRecord> studentUnitRecords)
     {
         studentId_ = studentId;
-        firstName = firstName_;
-        lastName = lastName_;
-        if (studentUnitRecords == null)
+        firstName_ = firstName;
+        lastName_ = lastName;
+        if (studentUnitRecords == null) {
             studentUnitRecords_ = new ArrayList<>();
+        }
         else {
             studentUnitRecords_ = studentUnitRecords;
         }
