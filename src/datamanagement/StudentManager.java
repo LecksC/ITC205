@@ -37,7 +37,7 @@ public class StudentManager
         if (student != null) {
             return student;
         }
-        return createStudent(studentId);
+        return loadStudent(studentId);
     }
 
 
@@ -55,7 +55,7 @@ public class StudentManager
 
 
 
-    private IStudent createStudent(Integer id)
+    private IStudent loadStudent(Integer id)
     {
         Element element = getStudentElement(id);
         if (element != null) {
