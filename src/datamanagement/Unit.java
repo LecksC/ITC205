@@ -58,9 +58,9 @@ implements IUnit
 
 
 
-    public void setAdditionalExaminationCutoff(float cutoff)
+    public void setAdditionalExaminationCutoff(float additionalExaminationCutoff)
     {
-        additionalExaminationCutoff_ = cutoff;
+        additionalExaminationCutoff_ = additionalExaminationCutoff;
     }
 
 
@@ -72,9 +72,9 @@ implements IUnit
 
 
 
-    public void setPassCutoff(float cutoff)
+    public void setPassCutoff(float passCutoff)
     {
-        passCutoff_ = cutoff;
+        passCutoff_ = passCutoff;
     }
 
 
@@ -86,9 +86,9 @@ implements IUnit
 
 
 
-    public void setCreditCutoff(float cutoff)
+    public void setCreditCutoff(float creditCutoff)
     {
-        creditCutoff_ = cutoff;
+        creditCutoff_ = creditCutoff;
     }
 
 
@@ -100,9 +100,9 @@ implements IUnit
 
 
 
-    public void setDistinctionCutoff(float cutoff)
+    public void setDistinctionCutoff(float distinctionCutoff)
     {
-        distinctionCutoff_ = cutoff;
+        distinctionCutoff_ = distinctionCutoff;
     }
 
 
@@ -114,9 +114,9 @@ implements IUnit
 
 
 
-    public void setHighDistinctionCutoff(float cutoff)
+    public void setHighDistinctionCutoff(float highDistinctionCutoff)
     {
-        highDistinctionCutoff_ = cutoff;
+        highDistinctionCutoff_ = highDistinctionCutoff;
     }
 
 

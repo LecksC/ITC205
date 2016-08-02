@@ -36,9 +36,9 @@ public class UnitProxy
 
 	
 
-	public void setAdditionalExaminationCutoff(float cutoff)
+	public void setAdditionalExaminationCutoff(float additionalExaminationCutoff)
 	{
-		unitManager_.getUnit(unitCode_).setAdditionalExaminationCutoff(cutoff);
+		unitManager_.getUnit(unitCode_).setAdditionalExaminationCutoff(additionalExaminationCutoff);
 	}
 	
 	
@@ -50,9 +50,9 @@ public class UnitProxy
 
 	
 	
-	public void setPassCutoff(float cutoff)
+	public void setPassCutoff(float passCutoff)
 	{
-		unitManager_.getUnit(unitCode_).setPassCutoff(cutoff);
+		unitManager_.getUnit(unitCode_).setPassCutoff(passCutoff);
 	}
 	
 	
@@ -64,9 +64,9 @@ public class UnitProxy
 
 	
 
-	public void setCreditCutoff(float cutoff)
+	public void setCreditCutoff(float creditCutoff)
 	{
-		unitManager_.getUnit(unitCode_).setCreditCutoff(cutoff);
+		unitManager_.getUnit(unitCode_).setCreditCutoff(creditCutoff);
 	}
 	
 	
@@ -78,9 +78,9 @@ public class UnitProxy
 
 	
 
-	public void setDistinctionCutoff(float cutoff)
+	public void setDistinctionCutoff(float distinctionCutoff)
 	{
-		unitManager_.getUnit(unitCode_).setDistinctionCutoff(cutoff);
+		unitManager_.getUnit(unitCode_).setDistinctionCutoff(distinctionCutoff);
 	}
 	
 	
@@ -92,9 +92,9 @@ public class UnitProxy
 
 	
 
-	public void setHighDistinctionCutoff(float cutoff)
+	public void setHighDistinctionCutoff(float highDistinctionCutoff)
 	{
-		unitManager_.getUnit(unitCode_).setHighDistinctionCutoff(cutoff);
+		unitManager_.getUnit(unitCode_).setHighDistinctionCutoff(highDistinctionCutoff);
 	}
 	
 	
