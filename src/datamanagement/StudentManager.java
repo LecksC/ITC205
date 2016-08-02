@@ -4,7 +4,6 @@ import org.jdom.Element;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class StudentManager
 {
@@ -60,8 +59,7 @@ public class StudentManager
     {
         Element element = getStudentElement(id);
         if (element != null) {
-            ArrayList<IStudentUnitRecord> studentRecordList = StudentUnitRecordManager.instance()
-                                                                                      .getRecordsByStudent(id);
+            ArrayList<IStudentUnitRecord> studentRecordList = StudentUnitRecordManager.instance().getRecordsByStudent(id);
 
             Integer studentId = new Integer(element.getAttributeValue("sid"));
             String firstName = element.getAttributeValue("fname");
@@ -83,7 +81,7 @@ public class StudentManager
         if (element != null) {
             return new StudentProxy(studentId, element.getAttributeValue("fname"), element.getAttributeValue("lname"));
         }
-        throw new RuntimeException("DBMD: createStudent : student not in file");
+        throw new RuntimeException("DBMD: createStudentProxy : student not in file");
     }
 
 
@@ -96,8 +94,7 @@ public class StudentManager
         }
 
         studentMap = new HashMap<Integer, IStudent>();
-        ArrayList<IStudentUnitRecord> studentUnitRecords = StudentUnitRecordManager.instance()
-                                                                                   .getRecordsByUnit(unitCode);
+        ArrayList<IStudentUnitRecord> studentUnitRecords = StudentUnitRecordManager.instance().getRecordsByUnit(unitCode);
 
         for (IStudentUnitRecord studentUnitRecord : studentUnitRecords) {
             IStudent student = createStudentProxy(new Integer(studentUnitRecord.getStudentID()));
