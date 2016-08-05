@@ -2,35 +2,35 @@ package datamanagement;
 
 import java.util.ArrayList;
 
-public interface IUnit {
-
+public interface IUnit
+{
     public String getUnitCode();
     public String getUnitName();
 
-    public float getPsCutoff();
-    public void  setPsCutoff1(float cutoff);
+    public float getAdditionalExaminationCutoff();
+    public void setAdditionalExaminationCutoff(float additionalExaminationCutoff);
 
-    public float getCrCutoff();
-    public void  setCrCutoff(float cutoff);
+    public float getPassCutoff();
+    public void setPassCutoff(float passCutoff);
 
-    public float getDiCuttoff();    
-    public void  setDiCutoff(float cutoff);
+    public float getCreditCutoff();
+    public void setCreditCutoff(float creditCutoff);
 
-    public float getHdCutoff();
-    public void  setHdCutoff(float cutoff);    
+    public float getDistinctionCutoff();
+    public void setDistinctionCutoff(float distinctionCutoff);
 
-    public float getAeCutoff();    
-    public void  setAeCutoff(float cutoff);
-    
-    public int getAsg1Weight();
-    public int getAsg2Weight();
+    public float getHighDistinctionCutoff();
+    public void setHighDistinctionCutoff(float highDistinctionCutoff);
+
+    public int getAssignment1Weight();
+    public int getAssignment2Weight();
     public int getExamWeight();
-    public void setAssessmentWeights(int asg1Wgt, int asg2Wgt, int examWgt);
+    public void setAssessmentWeights(int assignment1Weight, int assignment2Weight, int examWeight);
 
-    public String getGrade(float asg1, float asg2, float exam);
+    public String getGrade(float assignment1Grade, float assignment2Grade, float examGrade);
 
-    public void addStudentRecord(IStudentUnitRecord record );
-    public IStudentUnitRecord getStudentRecord(int studentID );
-    
+    public void addStudentRecord(IStudentUnitRecord studentUnitRecord);
+    public IStudentUnitRecord getStudentRecord(int studentID);
+
     public ArrayList<IStudentUnitRecord> listStudentRecords();
 }

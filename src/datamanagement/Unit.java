@@ -2,177 +2,225 @@ package datamanagement;
 
 import java.util.ArrayList;
 
-public class Unit implements IUnit {
-	private String uc;
-	private String UN;
-	private float co2;
-	private float co1;
-	private float co4;
-	private float co3;
-	private float co5;
-	private int a1, a2, ex;
-	
-	private ArrayList<IStudentUnitRecord> rs;
+public class Unit
+implements IUnit
+{
+    private String unitCode_, unitName_;
+    private float additionalExaminationCutoff_, passCutoff_, creditCutoff_, distinctionCutoff_, highDistinctionCutoff_;
+    private int	assignment1Weight_, assignment2Weight_, examWeight_;
+    private ArrayList<IStudentUnitRecord> studentUnitRecordList_;
 
-	public Unit(String UC, String un, float f1, float f2, float f3, float f4,
-			float f5, int i1, int i2, int i3, ArrayList<IStudentUnitRecord> rl) {
 
-		uc = UC;
-		UN = un;
-		co2 = f1;
-		co1 = f2;
-		this.co4 = f3;
-		co3 = f4;
-		this.co5 = f5;
-		this.setAssessmentWeights(i1, i2, i3);
-		rs = rl == null ? new ArrayList<>() : rl;
-	}
 
-	public String getUnitCode() {
-		return this.uc;
-	}
+    public Unit(String unitCode, String unitName,
+                float additionalExaminationCutoff, float passCutoff, float creditCutoff,
+                float distinctionCutoff, float highDistinctionCutoff,
+                int assignment1Weight, int assignment2Weight, int examWeight,
+                ArrayList<IStudentUnitRecord> studentUnitRecordList)
+    {
 
-	public String getUnitName() {
+        unitCode_ = unitCode;
+        unitName_ = unitName;
 
-		return this.UN;
-	}
+        additionalExaminationCutoff_ = additionalExaminationCutoff;
+        passCutoff_                  = passCutoff;
+        creditCutoff_                = creditCutoff;
+        distinctionCutoff_           = distinctionCutoff;
+        highDistinctionCutoff_       = highDistinctionCutoff;
 
-	public void setPsCutoff1(float cutoff) {
-		this.co2 = cutoff;
-	}
+        this.setAssessmentWeights(assignment1Weight, assignment2Weight, examWeight);
 
-	public float getPsCutoff() {
-		return this.co2;
-	}
+        if (studentUnitRecordList == null) {
+            studentUnitRecordList = new StudentUnitRecordList();
+        } else {
+            studentUnitRecordList_ = studentUnitRecordList;
+        }
+    }
 
-	public void setCrCutoff(float cutoff) {
-		this.co1 = cutoff;
-	}
 
-	public float getCrCutoff() {
-		return this.co1;
-	}
 
-	public void setDiCutoff(float cutoff) {
-		this.co4 = cutoff;
-	}
+    public String getUnitCode()
+    {
+        return unitCode_;
+    }
 
-	public float getDiCuttoff() {
-		return this.co4;
-	}
 
-	public void HDCutoff(float cutoff) {
-		this.co3 = cutoff;
-	}
 
-	public void setHdCutoff(float cutoff) {
-		this.co3 = cutoff;
-	}
+    public String getUnitName()
+    {
+        return unitName_;
+    }
 
-	public float getHdCutoff() {
-		return this.co3;
 
-	}
 
-	public void setAeCutoff(float cutoff) {
-		this.co5 = cutoff;
-	}
+    public float getAdditionalExaminationCutoff()
+    {
+        return additionalExaminationCutoff_;
+    }
 
-	public float getAeCutoff() {
-		return this.co5;
-	}
 
-	public void addStudentRecord(IStudentUnitRecord record) {
-		rs.add(record);
-	}
 
-	public IStudentUnitRecord getStudentRecord(int studentID) {
-		for (IStudentUnitRecord r : rs) {
-			if (r.getStudentID() == studentID)
-				return r;
-		}
-		return null;
-	}
+    public void setAdditionalExaminationCutoff(float additionalExaminationCutoff)
+    {
+        additionalExaminationCutoff_ = additionalExaminationCutoff;
+    }
 
-	public ArrayList<IStudentUnitRecord> listStudentRecords() {
-		return rs;
-	}
 
-	@Override
-	public int getAsg1Weight() {
-		return a1;
-	}
 
-	@Override
-	public int getAsg2Weight() {
-		return a2;
-	}
+    public float getPassCutoff()
+    {
+        return this.passCutoff_;
+    }
 
-	@Override
-	public int getExamWeight() {
-		return ex;
-	}
 
-	@Override
-	public void setAssessmentWeights(int a1, int a2, int ex) {
-		if (a1 < 0 || a1 > 100 ||
-			a2 < 0 || a2 > 100 ||
-			ex < 0 || ex > 100 ) {
-			throw new RuntimeException("Assessment weights cant be less than zero or greater than 100");
-		}			
-		if (a1 + a2 + ex != 100) {
-			throw new RuntimeException("Assessment weights must add to 100");
-		}
-		this.a1 = a1;
-		this.a2 = a2;
-		this.ex = ex;			
-	}
-	
-	private void setCutoffs( float ps, float cr, float di, float hd, float ae) {
-		if (ps < 0 || ps > 100 ||
-			cr < 0 || cr > 100 ||
-			di < 0 || di > 100 ||
-			hd < 0 || hd > 100 ||
-			ae < 0 || ae > 100 ) {
-			throw new RuntimeException("Assessment cutoffs cant be less than zero or greater than 100");
-		}
-		if (ae >= ps) {
-			throw new RuntimeException("AE cutoff must be less than PS cutoff");
-		}
-		if (ps >= cr) {
-			throw new RuntimeException("PS cutoff must be less than CR cutoff");
-		}
-		if (cr >= di) {
-			throw new RuntimeException("CR cutoff must be less than DI cutoff");
-		}
-		if (di >= hd) {
-			throw new RuntimeException("DI cutoff must be less than HD cutoff");
-		}
 
-	}
-	
-	public String getGrade(float f1, float f2, float f3) {
-		float t = f1 + f2 + f3;
-		
-		if (f1 < 0 || f1 > a1 ||
-			f2 < 0 || f2 > a2 ||
-			f3 < 0 || f3 > ex ) {
-			throw new RuntimeException("marks cannot be less than zero or greater than assessment weights");
-		}
+    public void setPassCutoff(float passCutoff)
+    {
+        passCutoff_ = passCutoff;
+    }
 
-		if (t < co5) {
-			return "FL";
-		} else if (t < co2)
-			return "AE";
-		else if (t < co1)
-			return "PS";
-		else if (t < co4)
-			return "CR";
-		else if (t < co3)
-			return "DI";
-		else
-			return "HD";
-	}
 
-	
+
+    public float getCreditCutoff()
+    {
+        return creditCutoff_;
+    }
+
+
+
+    public void setCreditCutoff(float creditCutoff)
+    {
+        creditCutoff_ = creditCutoff;
+    }
+
+
+
+    public float getDistinctionCutoff()
+    {
+        return distinctionCutoff_;
+    }
+
+
+
+    public void setDistinctionCutoff(float distinctionCutoff)
+    {
+        distinctionCutoff_ = distinctionCutoff;
+    }
+
+
+
+    public float getHighDistinctionCutoff()
+    {
+        return highDistinctionCutoff_;
+    }
+
+
+
+    public void setHighDistinctionCutoff(float highDistinctionCutoff)
+    {
+        highDistinctionCutoff_ = highDistinctionCutoff;
+    }
+
+
+
+    public int getAssignment1Weight()
+    {
+        return assignment1Weight_;
+    }
+
+
+
+    public int getAssignment2Weight()
+    {
+        return assignment2Weight_;
+    }
+
+
+
+    public int getExamWeight()
+    {
+        return examWeight_;
+    }
+
+
+
+    public void setAssessmentWeights(int assignment1Weight, int assignment2Weight, int examWeight)
+    {
+        boolean assignment1IsValid = assignment1Weight >= 0 || assignment1Weight <= 100;
+        boolean assignment2IsValid = assignment2Weight >= 0 || assignment2Weight <= 100;
+        boolean examIsValide       = examWeight        >= 0 || examWeight        <= 100;
+                
+        if (!assignment1IsValid || !assignment2IsValid || !examIsValide) {
+            throw new RuntimeException ("Assessment weights cant be less than zero or greater than 100");
+        }
+
+
+        if (assignment1Weight + assignment2Weight + examWeight != 100) {
+            throw new RuntimeException ("Assessment weights must add to 100");
+        }
+
+        assignment1Weight_ = assignment1Weight;
+        assignment2Weight_ = assignment2Weight;
+        examWeight_        = examWeight;			
+    }
+
+
+
+    public void addStudentRecord(IStudentUnitRecord studentUnitRecord)
+    {
+        studentUnitRecordList_.add(studentUnitRecord);
+    }
+
+
+
+    public IStudentUnitRecord getStudentRecord(int studentId)
+    {
+        for (IStudentUnitRecord record : studentUnitRecordList_) {
+            if (record.getStudentID() == studentId) {
+                return record;
+            }
+        }
+        return null;
+    }
+
+
+
+    public ArrayList<IStudentUnitRecord> listStudentRecords()
+    {
+        return studentUnitRecordList_;
+    }
+
+
+
+    public String getGrade(float assignment1Mark, float assignment2Mark, float exam1Mark)
+    {
+        float total = assignment1Mark + assignment2Mark + exam1Mark;
+
+        boolean assignment1IsValid = assignment1Mark >= 0 || assignment1Mark <= assignment1Weight_;
+        boolean assignment2IsValid = assignment2Mark >= 0 || assignment2Mark <= assignment2Weight_;
+        boolean examIsValid        = exam1Mark       >= 0 || exam1Mark       <= examWeight_;
+
+        if (!assignment1IsValid || !assignment2IsValid || !examIsValid) {
+            throw new RuntimeException("marks cannot be less than zero or greater than assessment weights");
+        }
+
+        if (total < additionalExaminationCutoff_) {
+            return "FL";
+        }
+        else if (total < passCutoff_) {
+            return "AE";
+        }
+        else if (total < creditCutoff_) {
+            return "PS";
+        }
+        else if (total < distinctionCutoff_) {
+            return "CR";
+        }
+        else if (total < highDistinctionCutoff_) {
+            return "DI";
+        }
+        else {
+            return "HD";
+        }
+    }
 }
