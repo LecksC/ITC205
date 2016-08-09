@@ -2,19 +2,16 @@ package datamanagement;
 
 import java.util.HashMap;
 import java.util.List;
-import org.jdom.*;
+import org.jdom.Element;
 
 public class UnitManager
 {
-    private static UnitManager self = null;
     private HashMap<String, IUnit> unitsByUnitCode_ = new HashMap<String, IUnit>();
+    private final static UnitManager instance_ = new UnitManager();
     
-    public static UnitManager unitManager()
+    public static UnitManager getInstance()
     {
-        if (self == null) {
-            self = new UnitManager();
-        }
-        return self;
+        return instance_;
     }
 
 
@@ -35,9 +32,9 @@ public class UnitManager
     {
     	IUnit unit;
 
-		for (Object unitElement : (List<?>) XMLManager.getInstance().getDocument().getRootElement()
+		for (Object unitElement : (List<?>) XMLManager.getInstance().getDocument().getRootElement()   // of Unit
 				                                      .getChild("unitTable").getChildren("unit")) {
-			
+
 			if (unitCode.equals(((Element) unitElement).getAttributeValue("uid"))) {
 				unit = new Unit(((Element) unitElement).getAttributeValue("uid"),
 						        ((Element) unitElement).getAttributeValue("name"),
@@ -59,12 +56,13 @@ public class UnitManager
 	}
 
 
+    
     public HashMap<String, IUnit> getUnits()
     {
         HashMap<String, IUnit> unitsByUnitCode = new HashMap<String, IUnit>();
         IUnit unit;
 
-        for (Object unitElement : (List<?>) XMLManager.getInstance().getDocument().getRootElement()
+        for (Object unitElement : (List<?>) XMLManager.getInstance().getDocument().getRootElement() // of Unit
                                                       .getChild("unitTable").getChildren("unit")) {
             
             unit = new UnitProxy(((Element) unitElement).getAttributeValue("uid"),

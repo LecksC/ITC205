@@ -18,7 +18,6 @@ implements IUnit
                 int assignment1Weight, int assignment2Weight, int examWeight,
                 ArrayList<IStudentUnitRecord> studentUnitRecordList)
     {
-
         unitCode_ = unitCode;
         unitName_ = unitName;
 
@@ -28,12 +27,13 @@ implements IUnit
         distinctionCutoff_           = distinctionCutoff;
         highDistinctionCutoff_       = highDistinctionCutoff;
 
-        this.setAssessmentWeights(assignment1Weight, assignment2Weight, examWeight);
+        setAssessmentWeights(assignment1Weight, assignment2Weight, examWeight);
 
-        if (studentUnitRecordList == null) {
-            studentUnitRecordList = new StudentUnitRecordList();
-        } else {
+        if (studentUnitRecordList != null) {
             studentUnitRecordList_ = studentUnitRecordList;
+            
+        } else {
+            studentUnitRecordList_ = new StudentUnitRecordList();
         }
     }
 
@@ -69,7 +69,7 @@ implements IUnit
 
     public float getPassCutoff()
     {
-        return this.passCutoff_;
+        return passCutoff_;
     }
 
 
@@ -151,7 +151,7 @@ implements IUnit
         boolean examIsValide       = examWeight        >= 0 || examWeight        <= 100;
                 
         if (!assignment1IsValid || !assignment2IsValid || !examIsValide) {
-            throw new RuntimeException ("Assessment weights cant be less than zero or greater than 100");
+            throw new RuntimeException ("Assessment weights can't be less than zero or greater than 100");
         }
 
 
@@ -201,7 +201,7 @@ implements IUnit
         boolean examIsValid        = exam1Mark       >= 0 || exam1Mark       <= examWeight_;
 
         if (!assignment1IsValid || !assignment2IsValid || !examIsValid) {
-            throw new RuntimeException("marks cannot be less than zero or greater than assessment weights");
+            throw new RuntimeException("Marks cannot be less than zero or greater than assessment weights");
         }
 
         if (total < additionalExaminationCutoff_) {

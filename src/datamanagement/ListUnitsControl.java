@@ -2,26 +2,26 @@ package datamanagement;
 
 import java.util.HashMap;
 
-public class ListUnitsCTL
+public class ListUnitsControl
 {
     private UnitManager unitManager_;
 
 
 
-    public ListUnitsCTL()
+    public ListUnitsControl()
     {
-        unitManager_ = UnitManager.unitManager();
+        unitManager_ = UnitManager.getInstance();
     }
 
 
 
-    public void listUnits(IUnitLister lister)
+    public void listUnits(IUnitLister uitLister)
     {
-        lister.clearUnits();
+        uitLister.clearUnits();
         HashMap<String, IUnit> unitsByUnitCode = unitManager_.getUnits();
 
         for (String unitCode : unitsByUnitCode.keySet()) {
-            lister.addUnit(unitsByUnitCode.get(unitCode));
+            uitLister.addUnit(unitsByUnitCode.get(unitCode));
         }
     }
 }
