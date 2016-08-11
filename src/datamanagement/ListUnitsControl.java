@@ -15,13 +15,13 @@ public class ListUnitsControl
 
 
 
-    public void listUnits(IUnitLister uitLister)
+    public void listUnits(IUnitLister unitLister)
     {
-        uitLister.clearUnits();
+        unitLister.clearUnits();
         HashMap<String, IUnit> unitsByUnitCode = unitManager_.getUnits();
 
         for (String unitCode : unitsByUnitCode.keySet()) {
-            uitLister.addUnit(unitsByUnitCode.get(unitCode));
+            unitLister.addUnit(unitsByUnitCode.get(unitCode));
         }
     }
 }

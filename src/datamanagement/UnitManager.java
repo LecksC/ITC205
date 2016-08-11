@@ -1,7 +1,6 @@
 package datamanagement;
 
 import java.util.HashMap;
-import java.util.List;
 import org.jdom.Element;
 
 public class UnitManager
@@ -31,10 +30,9 @@ public class UnitManager
     private IUnit createUnit(String unitCode)
     {
     	IUnit unit;
-
-		for (Object unitElement : (List<?>) XMLManager.getInstance().getDocument().getRootElement()   // of Unit
-				                                      .getChild("unitTable").getChildren("unit")) {
-
+    	
+    	Element[] elements = XMLManager.getInstance().getDatabaseRecords("unitTable", "unit");
+    	for (Element unitElement : elements) {
 			if (unitCode.equals(((Element) unitElement).getAttributeValue("uid"))) {
 				unit = new Unit(((Element) unitElement).getAttributeValue("uid"),
 						        ((Element) unitElement).getAttributeValue("name"),
@@ -62,8 +60,8 @@ public class UnitManager
         HashMap<String, IUnit> unitsByUnitCode = new HashMap<String, IUnit>();
         IUnit unit;
 
-        for (Object unitElement : (List<?>) XMLManager.getInstance().getDocument().getRootElement() // of Unit
-                                                      .getChild("unitTable").getChildren("unit")) {
+        Element[] elements = XMLManager.getInstance().getDatabaseRecords("unitTable", "unit");
+        for (Element unitElement : elements) {
             
             unit = new UnitProxy(((Element) unitElement).getAttributeValue("uid"),
                                  ((Element) unitElement).getAttributeValue("name"));

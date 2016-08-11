@@ -148,9 +148,9 @@ implements IUnit
     {
         boolean assignment1IsValid = assignment1Weight >= 0 || assignment1Weight <= 100;
         boolean assignment2IsValid = assignment2Weight >= 0 || assignment2Weight <= 100;
-        boolean examIsValide       = examWeight        >= 0 || examWeight        <= 100;
+        boolean examIsValid        = examWeight        >= 0 || examWeight        <= 100;
                 
-        if (!assignment1IsValid || !assignment2IsValid || !examIsValide) {
+        if (!assignment1IsValid || !assignment2IsValid || !examIsValid) {
             throw new RuntimeException ("Assessment weights can't be less than zero or greater than 100");
         }
 

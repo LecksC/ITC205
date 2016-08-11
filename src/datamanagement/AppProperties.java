@@ -6,19 +6,14 @@ import java.util.Properties;
 
 public class AppProperties
 {
-    private static AppProperties self_ = null;
     private Properties properties_;
-
+    private final static AppProperties instance_ = new AppProperties();
 
 
     public static AppProperties getInstance()
     {
-        if (self_ == null) {
-            self_ = new AppProperties();
-        }
-        return self_;
+        return instance_;
     }
-
 
 
     private AppProperties()
