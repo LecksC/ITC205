@@ -19,21 +19,20 @@ public class UnitManager
     {
         IUnit unit = unitsByUnitCode_.get(unitCode);
 
-        if (unit == null) {
-            unit = createUnit(unitCode);
+        if (unit != null) {
+            return unit;
         }
-        return unit;
+        return createUnit(unitCode);
     }
 
 
     
     private IUnit createUnit(String unitCode)
     {
-    	IUnit unit;
-    	
-    	Element[] elements = XMLManager.getInstance().getDatabaseRecords("unitTable", "unit");
+        Element[] elements = XMLManager.getInstance().getDatabaseRecords("unitTable", "unit");
     	for (Element unitElement : elements) {
-			if (unitCode.equals(((Element) unitElement).getAttributeValue("uid"))) {
+    	    IUnit unit;
+    	    if (unitCode.equals(((Element) unitElement).getAttributeValue("uid"))) {
 				unit = new Unit(((Element) unitElement).getAttributeValue("uid"),
 						        ((Element) unitElement).getAttributeValue("name"),
 								Float.valueOf(((Element) unitElement).getAttributeValue("ps")).floatValue(),
@@ -58,11 +57,10 @@ public class UnitManager
     public HashMap<String, IUnit> getUnits()
     {
         HashMap<String, IUnit> unitsByUnitCode = new HashMap<String, IUnit>();
-        IUnit unit;
 
         Element[] elements = XMLManager.getInstance().getDatabaseRecords("unitTable", "unit");
         for (Element unitElement : elements) {
-            
+            IUnit unit;
             unit = new UnitProxy(((Element) unitElement).getAttributeValue("uid"),
                                  ((Element) unitElement).getAttributeValue("name"));
 
