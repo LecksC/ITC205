@@ -59,8 +59,8 @@ public class UnitManager
 
         Element[] elements = XMLManager.getInstance().getDatabaseRecords("unitTable", "unit");
         for (Element unitElement : elements) {
-            IUnit unit = new UnitProxy( unitElement.getAttributeValue("uid"),
-                                        unitElement.getAttributeValue("name"));
+            IUnit unit = new UnitProxy(unitElement.getAttributeValue("uid"),
+                                       unitElement.getAttributeValue("name"));
 
             unitsByUnitCode.put(unit.getUnitCode(), unit);
         }
