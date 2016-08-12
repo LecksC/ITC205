@@ -31,19 +31,18 @@ public class UnitManager
     {
         Element[] elements = XMLManager.getInstance().getDatabaseRecords("unitTable", "unit");
     	for (Element unitElement : elements) {
-    	    IUnit unit;
     	    if (unitCode.equals(((Element) unitElement).getAttributeValue("uid"))) {
-				unit = new Unit(((Element) unitElement).getAttributeValue("uid"),
-						        ((Element) unitElement).getAttributeValue("name"),
-								Float.valueOf(((Element) unitElement).getAttributeValue("ps")).floatValue(),
-								Float.valueOf(((Element) unitElement).getAttributeValue("cr")).floatValue(),
-								Float.valueOf(((Element) unitElement).getAttributeValue("di")).floatValue(),
-								Float.valueOf(((Element) unitElement).getAttributeValue("hd")).floatValue(),
-								Float.valueOf(((Element) unitElement).getAttributeValue("ae")).floatValue(),
-								Integer.valueOf(((Element) unitElement).getAttributeValue("asg1wgt")).intValue(),
-								Integer.valueOf(((Element) unitElement).getAttributeValue("asg2wgt")).intValue(),
-								Integer.valueOf(((Element) unitElement).getAttributeValue("examwgt")).intValue(),
-								StudentUnitRecordManager.instance().getRecordsByUnit(unitCode));
+    	        IUnit unit = new Unit(unitElement.getAttributeValue("uid"),
+    	                              unitElement.getAttributeValue("name"),
+    	                              new Float(unitElement.getAttributeValue("ps")),
+    	                              new Float(unitElement.getAttributeValue("cr")),
+    	                              new Float(unitElement.getAttributeValue("di")),
+    	                              new Float(unitElement.getAttributeValue("hd")),
+    	                              new Float(unitElement.getAttributeValue("ae")),
+    	                              new Integer(unitElement.getAttributeValue("asg1wgt")),
+    	                              new Integer(unitElement.getAttributeValue("asg2wgt")),
+    	                              new Integer(unitElement.getAttributeValue("examwgt")),
+    	                              StudentUnitRecordManager.instance().getRecordsByUnit(unitCode));
 				
 				unitsByUnitCode_.put(unit.getUnitCode(), unit);
 				return unit;
@@ -60,9 +59,8 @@ public class UnitManager
 
         Element[] elements = XMLManager.getInstance().getDatabaseRecords("unitTable", "unit");
         for (Element unitElement : elements) {
-            IUnit unit;
-            unit = new UnitProxy(((Element) unitElement).getAttributeValue("uid"),
-                                 ((Element) unitElement).getAttributeValue("name"));
+            IUnit unit = new UnitProxy( unitElement.getAttributeValue("uid"),
+                                        unitElement.getAttributeValue("name"));
 
             unitsByUnitCode.put(unit.getUnitCode(), unit);
         }
