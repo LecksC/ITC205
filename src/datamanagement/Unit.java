@@ -33,7 +33,7 @@ implements IUnit
             studentUnitRecordList_ = studentUnitRecordList;
             
         } else {
-            studentUnitRecordList_ = new StudentUnitRecordList();
+            studentUnitRecordList_ = new ArrayList<IStudentUnitRecord>();
         }
     }
 

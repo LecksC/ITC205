@@ -42,7 +42,7 @@ public class UnitManager
     	                              new Integer(unitElement.getAttributeValue("asg1wgt")),
     	                              new Integer(unitElement.getAttributeValue("asg2wgt")),
     	                              new Integer(unitElement.getAttributeValue("examwgt")),
-    	                              StudentUnitRecordManager.instance().getRecordsByUnit(unitCode));
+    	                              StudentUnitRecordManager.getInstance().getRecordsByUnit(unitCode));
 				
 				unitsByUnitCode_.put(unit.getUnitCode(), unit);
 				return unit;

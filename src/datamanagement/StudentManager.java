@@ -59,7 +59,7 @@ public class StudentManager
     {
         Element element = getStudentElement(id);
         if (element != null) {
-            ArrayList<IStudentUnitRecord> studentRecordList = StudentUnitRecordManager.instance().getRecordsByStudent(id);
+            ArrayList<IStudentUnitRecord> studentRecordList = StudentUnitRecordManager.getInstance().getRecordsByStudent(id);
 
             Integer studentId = new Integer(element.getAttributeValue("sid"));
             String firstName = element.getAttributeValue("fname");
@@ -94,7 +94,7 @@ public class StudentManager
         }
 
         studentMap = new HashMap<Integer, IStudent>();
-        ArrayList<IStudentUnitRecord> studentUnitRecords = StudentUnitRecordManager.instance().getRecordsByUnit(unitCode);
+        ArrayList<IStudentUnitRecord> studentUnitRecords = StudentUnitRecordManager.getInstance().getRecordsByUnit(unitCode);
 
         for (IStudentUnitRecord studentUnitRecord : studentUnitRecords) {
             IStudent student = createStudentProxy(new Integer(studentUnitRecord.getStudentID()));
