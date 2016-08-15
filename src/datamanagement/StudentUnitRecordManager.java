@@ -131,20 +131,20 @@ public class StudentUnitRecordManager
 
     private ArrayList<IStudentUnitRecord> loadRecordsByStudent(Integer studentId)
     {
-        ArrayList<IStudentUnitRecord> records = new ArrayList<IStudentUnitRecord>();
+        ArrayList<IStudentUnitRecord> studentRecords = new ArrayList<IStudentUnitRecord>();
         ArrayList<Element> databaseRecords = findRecords(studentId, null);
 
         if (databaseRecords.size() == 0) {
-            return records;
+            return studentRecords;
         }
         for (Element databaseRecord : databaseRecords) {
             String unitCode = databaseRecord.getAttributeValue("uid");
-            records.add(new StudentUnitRecordProxy(studentId, unitCode));
+            studentRecords.add(new StudentUnitRecordProxy(studentId, unitCode));
         }
 
-        recordsByStudentId_.put(studentId, records);
+        recordsByStudentId_.put(studentId, studentRecords);
 
-        return records;
+        return studentRecords;
     }
 
 

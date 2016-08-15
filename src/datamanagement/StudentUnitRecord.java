@@ -70,13 +70,13 @@ implements IStudentUnitRecord
 
 
 
-    public void setExamMark(float mark)
+    public void setExamMark(float examMark)
     {
-        boolean isMarkInvalid = mark < 0 || mark > getUnit().getExamWeight();
+        boolean isMarkInvalid = examMark < 0 || examMark > getUnit().getExamWeight();
         if (isMarkInvalid) {
             throw new RuntimeException("Mark cannot be less than zero or greater than assessment weight");
         }
-        examMark_ = mark;
+        examMark_ = examMark;
     }
 
 
