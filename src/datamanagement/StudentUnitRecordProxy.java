@@ -5,15 +5,15 @@ implements IStudentUnitRecord
 {
     private Integer studentId_;
     private String unitCode_;
-    private StudentUnitRecordManager manager_;
+    private StudentUnitRecordManager studentUnitRecordManager_;
 
 
 
-    public StudentUnitRecordProxy(Integer id, String code)
+    public StudentUnitRecordProxy(Integer studentId, String unitCode)
     {
-        this.studentId_ = id;
-        this.unitCode_ = code;
-        this.manager_ = StudentUnitRecordManager.getInstance();
+        studentId_ = studentId;
+        unitCode_ = unitCode;
+        studentUnitRecordManager_ = StudentUnitRecordManager.getInstance();
     }
 
 
@@ -32,9 +32,9 @@ implements IStudentUnitRecord
 
 
 
-    public void setAssignment1Mark(float mark)
+    public void setAssignment1Mark(float assignment1Mark)
     {
-        getRecord().setAssignment1Mark(mark);
+        getRecord().setAssignment1Mark(assignment1Mark);
     }
 
 
@@ -46,9 +46,9 @@ implements IStudentUnitRecord
 
 
 
-    public void setAssignment2Mark(float mark)
+    public void setAssignment2Mark(float assignment2Mark)
     {
-        getRecord().setAssignment2Mark(mark);
+        getRecord().setAssignment2Mark(assignment2Mark);
     }
 
 
@@ -60,9 +60,9 @@ implements IStudentUnitRecord
 
 
 
-    public void setExamMark(float mark)
+    public void setExamMark(float examMark)
     {
-        getRecord().setExamMark(mark);
+        getRecord().setExamMark(examMark);
     }
 
 
@@ -83,6 +83,6 @@ implements IStudentUnitRecord
 
     private IStudentUnitRecord getRecord()
     {
-        return manager_.getStudentUnitRecord(studentId_, unitCode_);
+        return studentUnitRecordManager_.getStudentUnitRecord(studentId_, unitCode_);
     }
 }

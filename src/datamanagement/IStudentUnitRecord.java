@@ -10,7 +10,7 @@ public interface IStudentUnitRecord
 
     
     
-    public void setAssignment1Mark(float mark);
+    public void setAssignment1Mark(float assignment1Mark);
     
     
     
@@ -18,7 +18,7 @@ public interface IStudentUnitRecord
     
     
 
-    public void setAssignment2Mark(float mark);
+    public void setAssignment2Mark(float assignment2Mark);
     
     
     
@@ -26,7 +26,7 @@ public interface IStudentUnitRecord
     
     
 
-    public void setExamMark(float mark);
+    public void setExamMark(float examMark);
     
     
     

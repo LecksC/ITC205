@@ -5,7 +5,7 @@ public class CheckGradesControl
     private CheckGradesUserInterface userInterface_;
     private String currentUnitCode_ = null;
     private Integer currentStudentID_ = null;
-    private boolean changed_ = false;
+    private boolean hasChanged_ = false;
 
 
 
@@ -34,19 +34,15 @@ public class CheckGradesControl
 
 
 
-    public void unitSelected(String code)
+    public void unitSelected(String unitCode)
     {
-
-        if (code.equals("NONE")) {
-            userInterface_.setStudentComboEnabledAndClearError(false);
-        }
-        else {
+        boolean hasNoUnitCode = unitCode.equals("NONE");
+        if (hasNoUnitCode) {
             ListStudentsControl studentListControl = new ListStudentsControl();
-            studentListControl.listStudents(userInterface_, code);
-            currentUnitCode_ = code;
-            userInterface_.setStudentComboEnabledAndClearError(true);
+            studentListControl.listStudents(userInterface_, unitCode);
+            currentUnitCode_ = unitCode;
         }
-
+        userInterface_.setStudentComboEnabledAndClearError(!hasNoUnitCode);
         userInterface_.setCheckGradeButtonEnabled(false);
     }
 
@@ -72,7 +68,7 @@ public class CheckGradesControl
             userInterface_.setChangeButtonEnabled(true);
             userInterface_.setMarksEditable(false);
             userInterface_.setSaveEnabled(false);
-            changed_ = false;
+            hasChanged_ = false;
 
         }
     }
@@ -86,7 +82,7 @@ public class CheckGradesControl
 
         userInterface_.setChangeButtonEnabled(true);
         userInterface_.setMarksEditable(false);
-        if (changed_) {
+        if (hasChanged_) {
             userInterface_.setSaveEnabled(true);
         }
         return gradeText;
@@ -99,7 +95,7 @@ public class CheckGradesControl
         userInterface_.setChangeButtonEnabled(false);
         userInterface_.setSaveEnabled(false);
         userInterface_.setMarksEditable(true);
-        changed_ = true;
+        hasChanged_ = true;
     }
 
 

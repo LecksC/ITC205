@@ -34,22 +34,22 @@ public class StudentUnitRecordManager
 
     public IStudentUnitRecord getStudentUnitRecord(Integer studentId, String unitCode)
     {
-        String hash = getRecordHash(studentId, unitCode);
-        IStudentUnitRecord record = recordByStudentIdAndUnitCode_.get(hash);
-        if (record != null) {
-            return record;
+        String recordHash = getRecordHash(studentId, unitCode);
+        IStudentUnitRecord studentUnitRecord = recordByStudentIdAndUnitCode_.get(recordHash);
+        if (studentUnitRecord != null) {
+            return studentUnitRecord;
         }
 
-        return loadStudentUnitRecord(studentId, unitCode);
+        return loadRecord(studentId, unitCode);
     }
 
 
 
     public ArrayList<IStudentUnitRecord> getRecordsByStudent(Integer studentId)
     {
-        ArrayList<IStudentUnitRecord> records = recordsByStudentId_.get(studentId);
-        if (records != null) {
-            return records;
+        ArrayList<IStudentUnitRecord> studentUnitRecords = recordsByStudentId_.get(studentId);
+        if (studentUnitRecords != null) {
+            return studentUnitRecords;
         }
 
         return loadRecordsByStudent(studentId);
@@ -59,9 +59,9 @@ public class StudentUnitRecordManager
 
     public ArrayList<IStudentUnitRecord> getRecordsByUnit(String unitCode)
     {
-        ArrayList<IStudentUnitRecord> record = recordsByUnitCode_.get(unitCode);
-        if (record != null) {
-            return record;
+        ArrayList<IStudentUnitRecord> studentUnitRecord = recordsByUnitCode_.get(unitCode);
+        if (studentUnitRecord != null) {
+            return studentUnitRecord;
         }
 
         return loadRecordsByUnit(unitCode);
@@ -69,18 +69,18 @@ public class StudentUnitRecordManager
 
 
 
-    public void saveRecord(IStudentUnitRecord record)
+    public void saveRecord(IStudentUnitRecord studentUnitRecord)
     {
-        ArrayList<Element> databaseRecords = findRecords(record.getStudentID(), record.getUnitCode());
+        ArrayList<Element> databaseRecords = findRecords(studentUnitRecord.getStudentID(), studentUnitRecord.getUnitCode());
         if (databaseRecords.size() == 0) {
             throw new RuntimeException("DBMD: saveRecord : no such student record in data");
 
         }
         Element databaseRecord = databaseRecords.get(0);
 
-        databaseRecord.setAttribute("asg1", Float.toString(record.getAssignment1Mark()));
-        databaseRecord.setAttribute("asg2", Float.toString(record.getAssignment2Mark()));
-        databaseRecord.setAttribute("exam", Float.toString(record.getExamMark()));
+        databaseRecord.setAttribute("asg1", Float.toString(studentUnitRecord.getAssignment1Mark()));
+        databaseRecord.setAttribute("asg2", Float.toString(studentUnitRecord.getAssignment2Mark()));
+        databaseRecord.setAttribute("exam", Float.toString(studentUnitRecord.getExamMark()));
 
         XMLManager.getInstance().saveDocument();
         return;
@@ -88,7 +88,7 @@ public class StudentUnitRecordManager
 
 
 
-    private IStudentUnitRecord loadStudentUnitRecord(Integer studentId, String unitCode)
+    private IStudentUnitRecord loadRecord(Integer studentId, String unitCode)
     {
         ArrayList<Element> databaseRecords = findRecords(studentId, unitCode);
         if (databaseRecords.size() == 0) {
@@ -101,8 +101,8 @@ public class StudentUnitRecordManager
                                                              new Float(databaseRecord.getAttributeValue("asg2")),
                                                              new Float(databaseRecord.getAttributeValue("exam")));
 
-        String hash = getRecordHash(studentId, unitCode);
-        recordByStudentIdAndUnitCode_.put(hash, newRecord);
+        String recordHash = getRecordHash(studentId, unitCode);
+        recordByStudentIdAndUnitCode_.put(recordHash, newRecord);
 
         return newRecord;
     }

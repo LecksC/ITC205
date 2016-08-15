@@ -11,11 +11,11 @@ implements IStudentUnitRecord
 
     public StudentUnitRecord(Integer studentId, String unitCode, float assignment1Mark, float assignment2Mark, float examMark)
     {
-        this.studentId_ = studentId;
-        this.unitCode_ = unitCode;
-        this.setAssignment1Mark(assignment1Mark);
-        this.setAssignment2Mark(assignment2Mark);
-        this.setExamMark(examMark);
+        studentId_ = studentId;
+        unitCode_ = unitCode;
+        setAssignment1Mark(assignment1Mark);
+        setAssignment2Mark(assignment2Mark);
+        setExamMark(examMark);
     }
 
 
@@ -34,13 +34,13 @@ implements IStudentUnitRecord
 
 
 
-    public void setAssignment1Mark(float mark)
+    public void setAssignment1Mark(float assignment1Mark)
     {
-        boolean isMarkInvalid = mark < 0 || mark > getUnit().getAssignment1Weight();
+        boolean isMarkInvalid = assignment1Mark < 0 || assignment1Mark > getUnit().getAssignment1Weight();
         if (isMarkInvalid) {
             throw new RuntimeException("Mark cannot be less than zero or greater than assessment weight");
         }
-        this.assignment1Mark_ = mark;
+        assignment1Mark_ = assignment1Mark;
     }
 
 
@@ -52,13 +52,13 @@ implements IStudentUnitRecord
 
 
 
-    public void setAssignment2Mark(float mark)
+    public void setAssignment2Mark(float assignment2Mark)
     {
-        boolean isMarkInvalid = mark < 0 || mark > getUnit().getAssignment2Weight();
+        boolean isMarkInvalid = assignment2Mark < 0 || assignment2Mark > getUnit().getAssignment2Weight();
         if (isMarkInvalid) {
             throw new RuntimeException("Mark cannot be less than zero or greater than assessment weight");
         }
-        this.assignment2Mark_ = mark;
+        assignment2Mark_ = assignment2Mark;
     }
 
 
@@ -76,7 +76,7 @@ implements IStudentUnitRecord
         if (isMarkInvalid) {
             throw new RuntimeException("Mark cannot be less than zero or greater than assessment weight");
         }
-        this.examMark_ = mark;
+        examMark_ = mark;
     }
 
 

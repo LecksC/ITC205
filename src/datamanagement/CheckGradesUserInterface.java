@@ -37,25 +37,29 @@ implements IUnitLister, IStudentLister
     
     private DefaultComboBoxModel<String> unitComboBoxModel_;
     private DefaultComboBoxModel<String> studentComboBoxModel_;
-    private JButton changeButton_;
-    private JButton checkGradeButton_;
-    private JButton saveButton_;
-    private JComboBox<String> unitComboBox_;
-    private JComboBox<String> studentComboBox_;
+
     private JLabel titleLabel_;
     private JLabel assignment1MarkLabel_;
     private JLabel assignment2MarkLabel_;
     private JLabel examMarkLabel_;
     private JLabel gradeLabel_;
     private JLabel errorLabel_;
+    
     private JPanel unitPanel_;
     private JPanel studentPanel_;
     private JPanel marksPanel_;
     private JPanel gradePanel_;
+    
     private JTextField assignment1MarkTextField_;
     private JTextField assignment2MarkTextField_;
     private JTextField examMarkTextField_;
     
+    private JComboBox<String> unitComboBox_;
+    private JComboBox<String> studentComboBox_;
+    
+    private JButton changeButton_;
+    private JButton checkGradeButton_;
+    private JButton saveButton_;
     
     
     public CheckGradesUserInterface(CheckGradesControl control) 
@@ -87,9 +91,9 @@ implements IUnitLister, IStudentLister
 
     
     
-    public void setUnitComboBoxEnabledAndClearError(boolean enabled) 
+    public void setUnitComboBoxEnabledAndClearError(boolean isEnabled) 
     {
-        unitComboBox_.setEnabled(enabled);
+        unitComboBox_.setEnabled(isEnabled);
         errorLabel_.setText("");
     }
 
@@ -111,19 +115,19 @@ implements IUnitLister, IStudentLister
 
     
     
-    public void setStudentComboEnabledAndClearError(boolean enabled)
+    public void setStudentComboEnabledAndClearError(boolean isEnabled)
     {
-        studentComboBox_.setEnabled(enabled);
+        studentComboBox_.setEnabled(isEnabled);
         errorLabel_.setText("");
     }
 
     
     
-    public void setStudentUnitRecord(IStudentUnitRecord record) 
+    public void setStudentUnitRecord(IStudentUnitRecord studentUnitRecord) 
     {
-        assignment1MarkTextField_.setText(new Float(record.getAssignment1Mark()).toString());
-        assignment2MarkTextField_.setText(new Float(record.getAssignment2Mark()).toString());
-        examMarkTextField_.setText(new Float(record.getExamMark()).toString());
+        assignment1MarkTextField_.setText(new Float(studentUnitRecord.getAssignment1Mark()).toString());
+        assignment2MarkTextField_.setText(new Float(studentUnitRecord.getAssignment2Mark()).toString());
+        examMarkTextField_.setText(new Float(studentUnitRecord.getExamMark()).toString());
         gradeLabel_.setText("");
     }
 
@@ -143,32 +147,32 @@ implements IUnitLister, IStudentLister
 
     
     
-    public void setCheckGradeButtonEnabled(boolean enabled) 
+    public void setCheckGradeButtonEnabled(boolean isEnabled) 
     {
-        checkGradeButton_.setEnabled(enabled);
+        checkGradeButton_.setEnabled(isEnabled);
     }
 
     
     
-    public void setChangeButtonEnabled(boolean enabled) 
+    public void setChangeButtonEnabled(boolean isEnabled) 
     {
-        changeButton_.setEnabled(enabled);
+        changeButton_.setEnabled(isEnabled);
     }
 
     
     
-    public void setMarksEditable(boolean enabled) 
+    public void setMarksEditable(boolean isEnabled) 
     {
-        assignment1MarkTextField_.setEditable(enabled);
-        assignment2MarkTextField_.setEditable(enabled);
-        examMarkTextField_.setEditable(enabled);
+        assignment1MarkTextField_.setEditable(isEnabled);
+        assignment2MarkTextField_.setEditable(isEnabled);
+        examMarkTextField_.setEditable(isEnabled);
     }
 
     
     
-    public void setSaveEnabled(boolean enabled) 
+    public void setSaveEnabled(boolean isEnabled) 
     {
-        saveButton_.setEnabled(enabled);
+        saveButton_.setEnabled(isEnabled);
     }
     
     
@@ -176,21 +180,28 @@ implements IUnitLister, IStudentLister
     private void initializeComponents() 
     {
         titleLabel_ = new JLabel();
-        unitPanel_ = new JPanel();
-        unitComboBox_ = new JComboBox<String>();
-        studentPanel_ = new JPanel();
-        studentComboBox_ = new JComboBox<String>();
-        marksPanel_ = new JPanel();
         assignment1MarkLabel_ = new JLabel();
         assignment2MarkLabel_ = new JLabel();
-        examMarkLabel_ = new JLabel();
+        examMarkLabel_ = new JLabel();        
+        gradeLabel_ = new JLabel();  
+        errorLabel_ = new JLabel();
+        
+        studentPanel_ = new JPanel();       
+        marksPanel_ = new JPanel();        
+        unitPanel_ = new JPanel();
+        gradePanel_ = new JPanel();   
+        
         assignment1MarkTextField_ = new JTextField();
         assignment2MarkTextField_ = new JTextField();
         examMarkTextField_ = new JTextField();
+        
+        unitComboBox_ = new JComboBox<String>();
+        studentComboBox_ = new JComboBox<String>();
+        
         changeButton_ = new JButton();
-        gradePanel_ = new JPanel();
-        gradeLabel_ = new JLabel();
-
+        checkGradeButton_ = new JButton();
+        saveButton_ = new JButton();
+        
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         titleLabel_.setFont(new Font("Tahoma", 0, 16)); // NOI18N
@@ -300,7 +311,7 @@ implements IUnitLister, IStudentLister
             }
         });
         
-        checkGradeButton_ = new JButton();
+        
         checkGradeButton_.setText("Check Grade");
         checkGradeButton_.setActionCommand("checkGrade");
         checkGradeButton_.addActionListener(new ActionListener() {
@@ -373,11 +384,10 @@ implements IUnitLister, IStudentLister
                         .addComponent(gradeLabel_)
                         .addContainerGap(43, Short.MAX_VALUE)));
         
-        errorLabel_ = new JLabel();
         errorLabel_.setText("Error message");
         errorLabel_.setForeground(Color.RED);
         errorLabel_.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        saveButton_ = new JButton();
+
         saveButton_.setText("Save");
         saveButton_.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
