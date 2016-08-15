@@ -36,13 +36,13 @@ public class CheckGradesControl
 
     public void unitSelected(String unitCode)
     {
-        boolean hasNoUnitCode = unitCode.equals("NONE");
-        if (hasNoUnitCode) {
+        boolean hasUnitCode = !unitCode.equals("NONE");
+        if (hasUnitCode) {
             ListStudentsControl studentListControl = new ListStudentsControl();
             studentListControl.listStudents(userInterface_, unitCode);
             currentUnitCode_ = unitCode;
         }
-        userInterface_.setStudentComboEnabledAndClearError(!hasNoUnitCode);
+        userInterface_.setStudentComboEnabledAndClearError(hasUnitCode);
         userInterface_.setCheckGradeButtonEnabled(false);
     }
 
