@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class StudentManager
 {
-    private static StudentManager instance_ = null;
+    private final static StudentManager instance_ = new StudentManager();
     private HashMap<Integer, IStudent> studentsByStudentId_;
     private HashMap<String, HashMap<Integer, IStudent>> studentsByUnitCode_;
 
@@ -23,13 +23,10 @@ public class StudentManager
 
     public static StudentManager getInstance()
     {
-        if (instance_ == null) {
-            instance_ = new StudentManager();
-        }
         return instance_;
     }
 
-
+    
 
     public IStudent getStudent(Integer studentId)
     {
