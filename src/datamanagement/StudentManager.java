@@ -97,7 +97,7 @@ public class StudentManager
         ArrayList<IStudentUnitRecord> studentUnitRecords = StudentUnitRecordManager.getInstance().getRecordsByUnit(unitCode);
 
         for (IStudentUnitRecord studentUnitRecord : studentUnitRecords) {
-            IStudent student = createStudentProxy(new Integer(studentUnitRecord.getStudentID()));
+            IStudent student = createStudentProxy(new Integer(studentUnitRecord.getStudentId()));
             studentMap.put(student.getStudentId(), student);
         }
 
