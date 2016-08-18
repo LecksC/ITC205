@@ -52,13 +52,12 @@ public class StudentManager
 
 
 
-    private IStudent loadStudent(Integer id)
+    private IStudent loadStudent(Integer studentId)
     {
-        Element element = getStudentElement(id);
+        Element element = getStudentElement(studentId);
         if (element != null) {
-            ArrayList<IStudentUnitRecord> studentRecordList = StudentUnitRecordManager.getInstance().getRecordsByStudent(id);
+            ArrayList<IStudentUnitRecord> studentRecordList = StudentUnitRecordManager.getInstance().getRecordsByStudent(studentId);
 
-            Integer studentId = new Integer(element.getAttributeValue("sid"));
             String firstName = element.getAttributeValue("fname");
             String lastName = element.getAttributeValue("lname");
 
