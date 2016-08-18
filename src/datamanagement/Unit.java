@@ -175,7 +175,7 @@ implements IUnit
     public IStudentUnitRecord getStudentRecord(int studentId)
     {
         for (IStudentUnitRecord record : studentUnitRecordList_) {
-            if (record.getStudentID() == studentId) {
+            if (record.getStudentId() == studentId) {
                 return record;
             }
         }

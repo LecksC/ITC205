@@ -71,7 +71,7 @@ public class StudentUnitRecordManager
 
     public void saveRecord(IStudentUnitRecord studentUnitRecord)
     {
-        ArrayList<Element> databaseRecords = findRecords(studentUnitRecord.getStudentID(), studentUnitRecord.getUnitCode());
+        ArrayList<Element> databaseRecords = findRecords(studentUnitRecord.getStudentId(), studentUnitRecord.getUnitCode());
         if (databaseRecords.size() == 0) {
             throw new RuntimeException("DBMD: saveRecord : no such student record in data");
 
