@@ -10,6 +10,7 @@ public class AppProperties
     private final static AppProperties instance_ = new AppProperties();
 
 
+
     public static AppProperties getInstance()
     {
         return instance_;

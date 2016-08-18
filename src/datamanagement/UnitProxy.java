@@ -8,6 +8,8 @@ implements IUnit
     private String unitCode_, unitName_;
     private UnitManager unitManager_;
 
+
+
     public UnitProxy(String unitCode, String unitName)
     {
         unitCode_    = unitCode;

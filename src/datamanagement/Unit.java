@@ -31,7 +31,6 @@ implements IUnit
 
         if (studentUnitRecordList != null) {
             studentUnitRecordList_ = studentUnitRecordList;
-            
         } else {
             studentUnitRecordList_ = new ArrayList<IStudentUnitRecord>();
         }
