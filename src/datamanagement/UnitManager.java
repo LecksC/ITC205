@@ -7,7 +7,9 @@ public class UnitManager
 {
     private HashMap<String, IUnit> unitsByUnitCode_ = new HashMap<String, IUnit>();
     private final static UnitManager instance_ = new UnitManager();
-    
+
+
+
     public static UnitManager getInstance()
     {
         return instance_;
