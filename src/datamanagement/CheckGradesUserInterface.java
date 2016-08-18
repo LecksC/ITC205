@@ -162,11 +162,11 @@ implements IUnitLister, IStudentLister
 
     
     
-    public void setMarksEditable(boolean isEnabled) 
+    public void setMarksEditable(boolean isEditable) 
     {
-        assignment1MarkTextField_.setEditable(isEnabled);
-        assignment2MarkTextField_.setEditable(isEnabled);
-        examMarkTextField_.setEditable(isEnabled);
+        assignment1MarkTextField_.setEditable(isEditable);
+        assignment2MarkTextField_.setEditable(isEditable);
+        examMarkTextField_.setEditable(isEditable);
     }
 
     
